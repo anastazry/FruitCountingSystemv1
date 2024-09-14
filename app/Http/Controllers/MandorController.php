@@ -35,7 +35,7 @@ class MandorController extends Controller
         // // Automatically download the PDF file
         // return $pdf->download('assignment_' . $assignment_id . '_qrcode.pdf');
     }
-    public function mandorUpdateFruitDetails(Request $request, $assignment_id)
+    public function updateFruitDetails(Request $request, $assignment_id)
     {
         // Check if the user is authenticated
         if (!Auth::check()) {
