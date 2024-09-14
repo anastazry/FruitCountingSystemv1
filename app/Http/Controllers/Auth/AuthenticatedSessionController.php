@@ -32,10 +32,16 @@ class AuthenticatedSessionController extends Controller
         
         // Get the authenticated user
         $user = Auth::user();
-        
+        if (Auth::attempt($request->only('email', 'password'))) {
+            $request->session()->regenerate();
+
+            // Check if there's a redirect URL in the request
+            $redirectTo = $request->input('redirect', '/');
+            return redirect()->intended($redirectTo);
+        }
         // Retrieve the token from the request
         $token = $request->input('token', session()->pull('login_token', null));
-        
+        dd($token);
         // Check if a return URL token is present in the session
         $returnUrl = $token ? route('mandor-update-fruit-details', ['assignment_id' => $token]) : '/dashboard';
     

@@ -8,6 +8,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\MandorAssignment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Redirect;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class MandorController extends Controller
@@ -37,17 +38,18 @@ class MandorController extends Controller
     }
     public function updateFruitDetails(Request $request, $assignment_id)
     {
+        $metadataMandor = MandorAssignment::find($assignment_id);
+
         // Check if the user is authenticated
-        if (!Auth::check()) {
-            // Store the return URL and token in the session
-            session(['return_url' => url()->current(), 'login_token' => $assignment_id]);
-            
-            // Redirect to the login page with the token
-            return redirect()->route('login', ['token' => $assignment_id]);
+        if (Auth::check()) {
+            // User is logged in, show the form
+            return view('mandor.update-fruit', ['metadataMandor' => $metadataMandor]);
+        } else {
+            // User is not logged in, redirect to login with a callback URL
+            return Redirect::route('login', ['redirect' => route('form.show', ['id' => $assignment_id])]);
         }
     
         // Handle authenticated user and display the form
-        $metadataMandor = MandorAssignment::find($assignment_id);
         
         // Return the view with the form
         return view('mandor.update-fruit', compact('metadataMandor'));
