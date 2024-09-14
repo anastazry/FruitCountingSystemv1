@@ -63,9 +63,9 @@ class AdminController extends Controller
         ]);
         $user->save();
         // dd ($user);
-        return view('admin.dashboard-admin');
+        return view('dashboard');
 
-        return redirect()->route('admin.create-newuser')->with('message', 'User registered successfully');
+        // return redirect()->route('admin.create-newuser')->with('message', 'User registered successfully');
     }
 
     public function getEditUserAccountForm($id){
