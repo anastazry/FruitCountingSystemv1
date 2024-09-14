@@ -41,6 +41,9 @@ class AuthenticatedSessionController extends Controller
         } else {    //tak siap
             return redirect()->route('dashboard'); // Default role
         }
+            // Default redirection
+    $returnUrl = session()->pull('return_url', '/home');
+    return redirect()->intended($returnUrl);
     }
 
     /**

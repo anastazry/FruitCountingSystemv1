@@ -31,7 +31,7 @@
         .qr-code {
             margin: 0 auto;
             width: 300px;
-            height: 300px;
+            height: 200px;
         }
 
         .footer {
@@ -45,7 +45,9 @@
         <h1>Mandor Assignment Details</h1>
         <h6>SCAN HERE</h6>
 
-        <p>Assignment ID: {{ $metadataMandor->id }}</p>
+        <p>Peringkat: {{ $metadataMandor->peringkat }}</p>
+        <p>Peringkat: {{ $metadataMandor->blok }}</p>
+        <p>No Lot: {{ $metadataMandor->n_lot }}</p>
 
         <div class="qr-code">
             {!!$qrCode!!}

@@ -148,12 +148,7 @@ class AdminController extends Controller
 
         // // Use the modified data to create the record
         $mandorAssignment = MandorAssignment::create($validatedData);
-        // // Generate the URL that includes the id
-        // $url = route('another_form', ['id' => $mandorAssignment->id]);
 
-        // // Generate the QR code
-        // $qrCode = QrCode::size(200)->generate($url);
-        
         return redirect()->route('dashboard');
     }
 

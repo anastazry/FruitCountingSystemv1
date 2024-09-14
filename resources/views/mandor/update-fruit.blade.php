@@ -10,10 +10,6 @@
                 <!-- Header content goes here -->
                 Senarai Makanan
               </div>
-              <div>
-                {!! $qrCode !!}
-                camam
-            </div>
               <div class="p-2">
                 <!-- Body content goes here -->
                 @if(Session::has('message'))
