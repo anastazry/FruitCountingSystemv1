@@ -50,7 +50,7 @@ class MandorController extends Controller
         $metadataMandor = MandorAssignment::find($assignment_id);
         
         // Return the view with the form
-        return view('mandor-update-fruit-details', compact('metadataMandor'));
+        return view('mandor.update-fruit', compact('metadataMandor'));
     }
 
     public function generateQR($assignment_id){
