@@ -37,7 +37,13 @@ Route::prefix('admin')->group(function () {
     Route::get('/create-qr', [AdminController::class, 'createQR'])->name('admin.create-qr');
     Route::post('/assign-task', [AdminController::class, 'assignTaskToMandor'])->name('admin.assign-task');
     Route::get('/assignment-lists', [AdminController::class, 'getAssignmentList'])->name('admin.assign-list');
+    Route::get('/qr-code{assignment_id}', [MandorController::class, 'generateQRCodePage'])->name('admin.create-qrcode');
 });
+
+Route::prefix('super')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'returnSuperView'])->name('super-dashboard');
+});
+
 Route::get('/user/update-fruit-details/{assignment_id}', [MandorController::class, 'updateFruitDetails'])->name('mandor-update-fruit-details'); 
 Route::post('/user/insert-fruit-details/', [MandorController::class, 'insertFruitDetails'])->name('mandor-insert-fruit-details'); 
 

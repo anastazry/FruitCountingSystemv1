@@ -10,10 +10,10 @@
               <div class="px-4 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
                 <div>
                   <h2 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">
-                    Senarai 
+                    Senarai Tugasan 
                   </h2>
                   <p class="text-sm text-gray-600 dark:text-neutral-400">
-                    Tambah pengguna, ubah info pengguna, dan lain lain.
+                      Senarai Peringkat, Blok, Platform anda
                   </p>
                 </div>
 
@@ -87,7 +87,7 @@
                         </div>
                       </th>
 
-                      <th scope="col" class="px-4 py-3 text-end">Actions</th>
+                      <th scope="col" class="px-4 py-3 text-center">Actions</th>
                     </tr>
                   </thead>
 
@@ -149,6 +149,10 @@
                         <td class="h-px w-px whitespace-nowrap text-center">
                           <a class="inline-flex items-center gap-x-1.5 text-sm font-medium text-blue-600 decoration-2 hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 dark:text-blue-500 dark:focus:ring-offset-neutral-800" href="{{ route('mandor-update-fruit-details', ['assignment_id' => $assignment->id]) }}">
                             Update
+                          </a>
+                          <br>
+                          <a class="inline-flex items-center gap-x-1.5 text-sm font-medium text-blue-600 decoration-2 hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 dark:text-blue-500 dark:focus:ring-offset-neutral-800" href="{{ route('admin.create-qrcode', ['assignment_id' => $assignment->id]) }}">
+                            Print QR
                           </a>
                         </td>
                       </tr>

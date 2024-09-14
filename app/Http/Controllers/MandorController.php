@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FruitsModel;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\MandorAssignment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -13,6 +14,23 @@ class MandorController extends Controller
 {
 // Route::put('/user/edit-hazard-items-back/{hirarc_id}', [HirarcController::class, 'backToHazardFromRisk'])->name('user-backto-hazard-details'); 
 
+    public function generateQRCodePage($assignment_id)
+    {
+        // Generate the QR code
+        $url = route('mandor-update-fruit-details', ['assignment_id' => $assignment_id]);
+        $qrCode = QrCode::size(200)->generate($url);
+        // {!! QrCode::size(200)->generate('mandor-update-fruit-details', ['assignment_id' => $assignment_id])}
+
+        // Retrieve metadata for Mandor
+        $metadataMandor = MandorAssignment::find($assignment_id);
+        return view('admin.qrcode-page', compact('metadataMandor', 'qrCode'));
+
+        // Render the PDF with the QR code and metadata
+        $pdf = Pdf::loadView('admin.qrcode-page', compact('metadataMandor', 'qrCode'))->setPaper('a4', 'portrait');
+
+        // Automatically download the PDF file
+        return $pdf->download('assignment_' . $assignment_id . '_qrcode.pdf');
+    }
     public function updateFruitDetails($assignment_id)
     {
         // dd("camam");

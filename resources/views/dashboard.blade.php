@@ -48,42 +48,42 @@
         <div class="card-container">
             <a href="#" class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 uniform-card">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Number of Users</h5>
-                {{-- <p class="font-normal text-gray-700 dark:text-gray-400">{{$userCount}}</p> --}}
-            </a>
-            <a href="#" class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 uniform-card">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Number of IO</h5>
-                {{-- <p class="font-normal text-gray-700 dark:text-gray-400">{{$svCount}}</p> --}}
+                <p class="font-normal text-gray-700 dark:text-gray-400">38</p>
             </a>
             <a href="#" class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 uniform-card">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Number of Super</h5>
-                {{-- <p class="font-normal text-gray-700 dark:text-gray-400">{{$pmCount}}</p> --}}
+                <p class="font-normal text-gray-700 dark:text-gray-400">3</p>
             </a>
             <a href="#" class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 uniform-card">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Number of Admin</h5>
-                {{-- <p class="font-normal text-gray-700 dark:text-gray-400">{{$shoCount}}</p> --}}
+                <p class="font-normal text-gray-700 dark:text-gray-400">5</p>
+            </a>
+            <a href="#" class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 uniform-card">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Number of Mandor</h5>
+                <p class="font-normal text-gray-700 dark:text-gray-400">30</p>
             </a>
         </div>
     </div>
-    <div class="max-w-8xl mx-auto sm:px-6 lg:px-8" style="padding-left: 5%; outline: auto; width: 65%; height: 50%; display: flex; gap: 20px; padding   : 3%; padding-bottom: 5%">
+    {{-- <div class="max-w-8xl mx-auto sm:px-6 lg:px-8" style="padding-left: 5%; outline: auto; width: 65%; height: 50%; display: flex; gap: 20px; padding   : 3%; padding-bottom: 5%">
         <!-- First Div (Left) -->
         <div style="width: 50%; height: 100%; outline: auto;">
             <a href="#" class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 uniform-card" style="height: 100%;">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Cases</h5>
                 {{-- <p class="font-normal text-gray-700 dark:text-gray-400">{{$hirarcCount}}</p> --}}
-            </a>
-        </div>
+            {{-- </a> --}}
+        {{-- </div> --}}
     
         <!-- Second Div (Right) -->
-        <div style="width: 50%; display: flex; flex-direction: column; justify-content: space-between;">
-            <a href="#" class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 uniform-card">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Completed</h5>
+        {{-- <div style="width: 50%; display: flex; flex-direction: column; justify-content: space-between;"> --}}
+            {{-- <a href="#" class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 uniform-card"> --}}
+                {{-- <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Completed</h5> --}}
                 {{-- <p class="font-normal text-gray-700 dark:text-gray-400">{{$hirarcReportCount}}</p> --}}
-            </a>
-            <a href="#" class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 uniform-card">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Ongoing</h5>
+            {{-- </a> --}}
+            {{-- <a href="#" class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 uniform-card"> --}}
+                {{-- <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Ongoing</h5> --}}
                 {{-- <p class="font-normal text-gray-700 dark:text-gray-400">{{$incidentCount}}</p> --}}
-            </a>
-        </div>
+            {{-- </a> --}}
+        {{-- </div> --}}
     </div>
     
     

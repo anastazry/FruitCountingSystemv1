@@ -12,6 +12,9 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class AdminController extends Controller
 {
+    public function returnSuperView(){
+        return view('super.dashboard-super');
+    }
     public function getAssignmentList(){
         $assignments = MandorAssignment::all();
         // dd($assignments);
