@@ -19,16 +19,16 @@ class MandorController extends Controller
         // Generate the QR code
         // $url = route('mandor-update-fruit-details', ['assignment_id' => $assignment_id]);
         // Generate the URL with a 'redirect_to' query parameter
-        $url = route('mandor-update-fruit-details', ['assignment_id' => $assignment_id]) . '?redirect_to=' . urlencode(url()->current());
+        $token = $assignment_id;
+        session()->put('login_token', $token);
+        $url = route('mandor-update-fruit-details', ['assignment_id' => $assignment_id, 'token' => $token]);
 
         $qrCode = QrCode::size(200)->generate($url);
         // {!! QrCode::size(200)->generate('mandor-update-fruit-details', ['assignment_id' => $assignment_id])}
 
         // Retrieve metadata for Mandor
         $metadataMandor = MandorAssignment::find($assignment_id);
-        $token = 1;
-        return view('admin.qrcode-page', compact('metadataMandor', 'qrCode','token'));
-
+        return view('admin.qrcode-page', compact('metadataMandor', 'qrCode', 'token'));
         // Render the PDF with the QR code and metadata
         // $pdf = Pdf::loadView('admin.qrcode-page', compact('metadataMandor', 'qrCode'))->setPaper('a4', 'portrait');
 
@@ -39,16 +39,16 @@ class MandorController extends Controller
     {
         // Check if the user is authenticated
         if (!Auth::check()) {
-            // Store the return URL in the session
-            session(['return_url' => url()->current()]);
-    
-            // Redirect to the login page
-            return redirect()->route('login');
+            // Store the return URL and token in the session
+            session(['return_url' => url()->current(), 'login_token' => $assignment_id]);
+            
+            // Redirect to the login page with the token
+            return redirect()->route('login', ['token' => $assignment_id]);
         }
     
         // Handle authenticated user and display the form
         $metadataMandor = MandorAssignment::find($assignment_id);
-    
+        
         // Return the view with the form
         return view('mandor-update-fruit-details', compact('metadataMandor'));
     }

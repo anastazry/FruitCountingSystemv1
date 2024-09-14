@@ -26,25 +26,32 @@ class AuthenticatedSessionController extends Controller
     {
         // Authenticate the user
         $request->authenticate();
-    
+        
         // Regenerate the session to prevent session fixation attacks
         $request->session()->regenerate();
-    
+        
         // Get the authenticated user
         $user = Auth::user();
+        
+        // Retrieve the token from the request
+        $token = $request->input('token', session()->pull('login_token', null));
+        
+        // Check if a return URL token is present in the session
+        $returnUrl = $token ? route('mandor-update-fruit-details', ['assignment_id' => $token]) : '/dashboard';
     
         // Check user role and redirect accordingly
-        if ($user->role == 'Admin') {   //tak siap
+        if ($user->role == 'Admin') {
             return redirect()->route('dashboard');
-        } elseif ($user->role == 'Super') { 
+        } elseif ($user->role == 'Super') {
             return redirect()->route('super-dashboard');
-        } else {    //tak siap
+        } else {
             return redirect()->route('dashboard'); // Default role
         }
-            // Default redirection
-    $returnUrl = session()->pull('return_url', '/home');
-    return redirect()->intended($returnUrl);
+    
+        // Default redirection to the stored URL or '/home'
+        return redirect()->intended($returnUrl);
     }
+    
 
     /**
      * Destroy an authenticated session.
