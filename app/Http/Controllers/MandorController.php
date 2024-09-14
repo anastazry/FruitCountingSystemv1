@@ -46,7 +46,7 @@ class MandorController extends Controller
             return view('mandor.update-fruit', ['metadataMandor' => $metadataMandor]);
         } else {
             // User is not logged in, redirect to login with a callback URL
-            return Redirect::route('login', ['redirect' => route('form.show', ['id' => $assignment_id])]);
+            return Redirect::route('login', ['redirect' => route('login', ['id' => $assignment_id])]);
         }
     
         // Handle authenticated user and display the form
