@@ -35,6 +35,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/register', [AdminController::class, 'registerUser'])->name('admin.register.post');
     Route::get('/user-list', [AdminController::class, 'getAllUserList'])->name('admin.users-list');
     Route::get('/create-qr', [AdminController::class, 'createQR'])->name('admin.create-qr');
+    Route::get('/update-assignment/{assignment_id}', [AdminController::class, 'getUpdateAssignmentDetails'])->name('admin.update-assignment');
+    Route::put('/update-assignment-insert/{assignment_id}', [AdminController::class, 'updateTaskAssignment'])->name('admin.update-assignment-insert');
     Route::post('/assign-task', [AdminController::class, 'assignTaskToMandor'])->name('admin.assign-task');
     Route::get('/assignment-lists', [AdminController::class, 'getAssignmentList'])->name('admin.assign-list');
     Route::get('/qr-code{assignment_id}', [MandorController::class, 'generateQRCodePage'])->name('admin.create-qrcode');

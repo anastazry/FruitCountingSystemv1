@@ -29,7 +29,6 @@ class LoginRequest extends FormRequest
         return [
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
-            'token' => ['nullable', 'string'], // Add validation for the token
         ];
     }
 

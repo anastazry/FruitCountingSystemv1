@@ -18,13 +18,18 @@
                     {{ Session::get('message') }}
                   </div>
                 @endif
-                <form method="POST" action="{{ route('admin.assign-task') }}">
+                @if(isset($mandorAssignment))
+                    <form method="POST" action="{{ route('admin.update-assignment-insert', ['assignment_id' => $mandorAssignment->id]) }}">
+                    @method('PUT')
+                @else
+                    <form method="POST" action="{{ route('admin.assign-task') }}">
+                @endif
                     @csrf
 
                     {{-- Peringkat --}}
                     <div class="mt-4">
-                        <x-input-label for="Peringkat" :value="__('Peringkat')" />
-                        <x-text-input id="peringkat" class="block mt-1 w-full" type="text" name="peringkat" :value="old('peringkat')" required />
+                        <x-input-label for="peringkat" :value="__('Peringkat')" />
+                        <x-text-input id="peringkat" class="block mt-1 w-full" type="text" name="peringkat" :value="old('peringkat', $mandorAssignment->peringkat ?? '')" required />
                         <x-input-error :messages="$errors->get('peringkat')" class="mt-2" />
                     </div>
                     {{-- Peringkat End --}}
@@ -34,7 +39,7 @@
                     {{-- Blok --}}
                     <div class="mt-4">
                         <x-input-label for="Blok" :value="__('Blok')" />
-                        <x-text-input id="blok" class="block mt-1 w-full" type="text" name="blok" :value="old('blok')" required />
+                        <x-text-input id="blok" class="block mt-1 w-full" type="text" name="blok" :value="old('blok', $mandorAssignment->blok ?? '')" required />
                         <x-input-error :messages="$errors->get('blok')" class="mt-2" />
                     </div>
                     {{-- Blok End --}}
@@ -44,7 +49,7 @@
                     {{-- No Lot --}}
                     <div class="mt-4">
                         <x-input-label for="n_lot" :value="__('No Lot')" />
-                        <x-text-input id="n_lot" class="block mt-1 w-full" type="text" name="n_lot" :value="old('n_lot')" required />
+                        <x-text-input id="n_lot" class="block mt-1 w-full" type="text" name="n_lot" :value="old('n_lot', $mandorAssignment->n_lot ?? '')" required />
                         <x-input-error :messages="$errors->get('n_lot')" class="mt-2" />
                     </div>
                     {{-- No Lot--}}
@@ -54,7 +59,7 @@
                     {{-- No Lot --}}
                     <div class="mt-4">
                         <x-input-label for="n_p_tuai" :value="__('No Pentas Tuai')" />
-                        <x-text-input id="n_p_tuai" class="block mt-1 w-full" type="text" name="n_p_tuai" :value="old('n_p_tuai')" required />
+                        <x-text-input id="n_p_tuai" class="block mt-1 w-full" type="text" name="n_p_tuai" :value="old('n_p_tuai', $mandorAssignment->n_p_tuai ?? '')" required />
                         <x-input-error :messages="$errors->get('n_p_tuai')" class="mt-2" />
                     </div>
                     {{-- No Lot--}}
@@ -67,7 +72,11 @@
                         <select name="mandor_id" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             @foreach($users as $user)
                                 @if($user->role == 'Mandor')
+                                    @if(isset($mandorAssignment->mandor_id) && $mandorAssignment->mandor_id == $user->id )
+                                    <option value="{{ $user->id }}" selected>{{ $user->name}}</option>
+                                    @else
                                     <option value="{{ $user->id }}">{{ $user->name}}</option>
+                                    @endif
                                 @endif
                             @endforeach
                         </select>
@@ -79,7 +88,7 @@
                     {{-- Kumpulan Penuai --}}
                     <div class="mt-4">
                         <x-input-label for="k_penuai" :value="__('Kumpulan Penuai')" />
-                        <x-text-input id="k_penuai" class="block mt-1 w-full" type="text" name="k_penuai" :value="old('k_penuai')" required />
+                        <x-text-input id="k_penuai" class="block mt-1 w-full" type="text" name="k_penuai" :value="old('k_penuai', $mandorAssignment->k_penuai ?? '')"  required />
                         <x-input-error :messages="$errors->get('k_penuai')" class="mt-2" />
                     </div>
                     {{-- Kumpulan Penuai End --}}

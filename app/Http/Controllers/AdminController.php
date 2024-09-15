@@ -151,6 +151,53 @@ class AdminController extends Controller
 
         return redirect()->route('dashboard');
     }
+    public function getUpdateAssignmentDetails($assignment_id)
+    {
+        // Find the existing MandorAssignment by assignment_id
+        $mandorAssignment = MandorAssignment::find($assignment_id);
+        $users = User::all();
+
+        // dd($mandorAssignment);
+        return view('admin.create-qr', compact('mandorAssignment', 'users'));
+
+    }
+
+    public function updateTaskAssignment(Request $request, $assignment_id)
+    {
+        // Find the existing MandorAssignment by assignment_id
+        $mandorAssignment = MandorAssignment::find($assignment_id);
+
+        // Check if the record exists
+        if (!$mandorAssignment) {
+            return redirect()->route('dashboard')->with('error', 'Assignment not found.');
+        }
+
+        // Validate the request data
+        $validator = Validator::make($request->all(), [
+            'peringkat' => 'required|string',
+            'blok' => 'required|string',
+            'n_lot' => 'required|string',
+            'n_p_tuai' => 'required|string',
+            'mandor_id' => 'required|exists:users,id',
+            'k_penuai' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            // Dump the failed validation messages (optional for debugging)
+            dd($validator->errors()->all()); // Shows all error messages
+            
+            // Return back with errors if validation fails
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Get the validated data and update the record
+        $validatedData = $validator->validated();
+        
+        // Update the MandorAssignment record
+        $mandorAssignment->update($validatedData);
+
+        return redirect()->route('admin.assign-list')->with('success', 'Assignment updated successfully.');
+    }
 
 }
         // Validate and create the assignment
