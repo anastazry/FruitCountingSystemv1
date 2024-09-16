@@ -23,6 +23,7 @@ class FruitsModel extends Model
         'tarikh', 
         'masa', 
         'mandor_id', 
+        'delivery_status', 
         'assignment_id', 
     ];
 

@@ -91,7 +91,7 @@
 
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                29.4%
+                13000
               </h3>
             </div>
           </div>
@@ -109,7 +109,7 @@
 
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                56.8%
+                23,3333
               </h3>
               <span class="flex items-center gap-x-1 text-red-600">
                 <svg class="inline-block size-4 self-center" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -136,7 +136,7 @@
 
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                92,913
+                34,222
               </h3>
             </div>
           </div>
@@ -151,7 +151,7 @@
   
               <div class="mt-1 flex items-center gap-x-2">
                 <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                  92,913
+                  23,344
                 </h3>
               </div>
             </div>
