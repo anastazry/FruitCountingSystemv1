@@ -160,8 +160,16 @@ class MandorController extends Controller
     
         // Check if the user is authenticated
         if (Auth::check()) {
+            $fruitToday = DB::table('fruits_detaile_tbl')
+            ->where('assignment_id', $assignment_id)
+            ->whereDate('created_at', Carbon::today())
+            ->first(); 
+            if($fruitToday){
+                return view('mandor.update-fruit', compact('metadataMandor', 'fruitToday'));
+            }else{
+                return view('mandor.update-fruit', ['metadataMandor' => $metadataMandor]);
+            }
             // User is logged in, show the form
-            return view('mandor.update-fruit', ['metadataMandor' => $metadataMandor]);
         } else {
             // User is not logged in, redirect to login with a callback URL
             return Redirect::route('login', ['redirect' => url()->current()]);
