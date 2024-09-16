@@ -194,6 +194,7 @@ class MandorController extends Controller
     {
         // Find the MandorAssignment by its ID
         $metadataMandor = MandorAssignment::find($assignment_id);
+        $assignment = $metadataMandor;
     
         // Check if the assignment exists
         if (!$metadataMandor) {
@@ -219,7 +220,7 @@ class MandorController extends Controller
                     return view('mandor.update-fruit', ['metadataMandor' => $metadataMandor]);
                 }
             } elseif ($user->role == "Pemandu") {
-                return view('mandor.driver-confirm', compact('metadataMandor'));
+                return view('mandor.driver-confirm', compact('assignment'));
             } else {
                 // Handle other roles or redirect as needed
                 return abort(403, 'Unauthorized action.');
@@ -229,7 +230,7 @@ class MandorController extends Controller
             return Redirect::route('login', ['redirect' => url()->current()]);
         }
     }
-    
+
     public function editFruitDetails($assignment_id, $fruit_id)
     {
         // Fetch the assignment and fruit details
