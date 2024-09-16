@@ -63,6 +63,7 @@ class MandorController extends Controller
             $fruit->panjang = $request->panjang;
             $fruit->s_lama = $request->s_lama;
             $fruit->s_baru = $request->s_baru;
+            $fruit->status = "Selesai";
             $fruit->tarikh = now();
     
             if ($request->hasFile('gambar')) {
@@ -210,7 +211,7 @@ class MandorController extends Controller
                 // Retrieve the fruit details for today based on assignment ID
                 $fruitToday = DB::table('fruits_detaile_tbl')
                     ->where('assignment_id', $assignment_id)
-                    ->whereDate('tarikh', Carbon::today())
+                    ->whereDate('created_at', Carbon::today())
                     ->first();
     
                 // Return the appropriate view based on whether fruit details are available
