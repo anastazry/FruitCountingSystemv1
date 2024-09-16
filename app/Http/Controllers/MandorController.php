@@ -213,11 +213,13 @@ class MandorController extends Controller
                     ->where('assignment_id', $assignment_id)
                     ->whereDate('created_at', Carbon::today())
                     ->first();
+                    $fruit_id = $fruitToday->id;
     
                 // Return the appropriate view based on whether fruit details are available
                 if ($fruitToday) {
-                    return view('mandor.update-fruit', compact('metadataMandor', 'fruitToday'));
+                    return redirect()->route('editFruitDetails', ['assignment_id' => $assignment_id, 'fruit_id' => $fruit_id]);
                 } else {
+                    
                     return view('mandor.update-fruit', ['metadataMandor' => $metadataMandor]);
                 }
             } elseif ($user->role == "Pemandu") {
