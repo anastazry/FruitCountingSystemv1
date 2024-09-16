@@ -8,7 +8,7 @@
             <div class="bg-white border rounded shadow p-4" >
               <div class="border-b p-2">
                 <!-- Header content goes here -->
-                Create New User
+                Tambah Pengguna
               </div>
               <div class="p-2">
                 <!-- Body content goes here -->
@@ -63,6 +63,7 @@
                                 <option value="Admin" {{ old('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
                                 <option value="Super" {{ old('role') == 'Super' ? 'selected' : '' }}>Super</option>
                                 <option value="Mandor" {{ old('role') == 'Mandor' ? 'selected' : '' }}>Mandor</option>
+                                <option value="Pemandu" {{ old('role') == 'Pemandu' ? 'selected' : '' }}>Pemandu</option>
                             </select>
                             <x-input-error :messages="$errors->get('role')" class="mt-2" />
                         </div>

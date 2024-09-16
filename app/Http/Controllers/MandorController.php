@@ -15,6 +15,41 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class MandorController extends Controller
 {
+    public function getDriverAnswer($selection, $assignment_id)
+    {
+        $user_id = Auth::user()->id;
+    
+        if ($selection == "yes") {
+            // Check if a record for today exists
+            $fruitToday = DB::table('fruits_detaile_tbl')
+                ->where('assignment_id', $assignment_id)
+                ->whereDate('tarikh', Carbon::today())
+                ->first();
+    
+            if ($fruitToday) {
+                // Update using DB::table for an existing record
+                DB::table('fruits_detaile_tbl')
+                    ->where('id', $fruitToday->id)
+                    ->update(['delivery_status' => 'Dalam Perjalanan']);
+            } else {
+                // Create a new record using Eloquent
+                $fruit = FruitsModel::create([
+                    'driver_id' => $user_id,
+                    'assignment_id' => $assignment_id,
+                    'delivery_status' => "Dalam Perjalanan",
+                ]);
+            }
+            return view('mandor.thankyoupage');
+        } else {
+            return view('mandor.thankyoupage');
+        }
+    }
+    
+    public function getDriverPage($assignment_id){
+        $assignment = MandorAssignment::find($assignment_id);
+        return view('mandor.driver-confirm', compact('assignment'));
+    }
+
     public function editCurrentFruitDetails(Request $request)
     {
         // Find the fruit
@@ -28,6 +63,7 @@ class MandorController extends Controller
             $fruit->panjang = $request->panjang;
             $fruit->s_lama = $request->s_lama;
             $fruit->s_baru = $request->s_baru;
+            $fruit->tarikh = now();
     
             if ($request->hasFile('gambar')) {
                 // Handle the new image upload
@@ -162,7 +198,7 @@ class MandorController extends Controller
         if (Auth::check()) {
             $fruitToday = DB::table('fruits_detaile_tbl')
             ->where('assignment_id', $assignment_id)
-            ->whereDate('created_at', Carbon::today())
+            ->whereDate('tarikh', Carbon::today())
             ->first(); 
             if($fruitToday){
                 return view('mandor.update-fruit', compact('metadataMandor', 'fruitToday'));
@@ -250,6 +286,8 @@ class MandorController extends Controller
             'image_path' => $imagePath, // Store the relative path to the image
             'mandor_id' => $user_id,
             'assignment_id' => $assignment_id,
+            'delivery_status' => "Pending",
+            'tarikh' => now(), 
         ]);
         $fruit->save();
         $metadataMandor = MandorAssignment::find($assignment_id);

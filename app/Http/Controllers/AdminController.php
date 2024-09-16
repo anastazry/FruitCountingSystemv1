@@ -18,9 +18,10 @@ class AdminController extends Controller
         $page = "Dashboard";
         return view('super.dashboard-super', compact('page'));
     }
-    public function getAssignmentList(){
+    public function getAssignmentList()
+    {
         $assignments = MandorAssignment::all();
-        // dd($assignments);
+    
         foreach ($assignments as $assignment) {
             // Query the fruits table using assignment_id and created_at for today
             $fruitsToday = DB::table('fruits_detaile_tbl')
@@ -29,17 +30,39 @@ class AdminController extends Controller
                 ->get(); // Get a collection of results
     
             if ($fruitsToday->isNotEmpty()) {
-                // Iterate over fruits found today
+                // Initialize default values
+                $hasDeliveryStatus = false;
+                $status = "Pending";
+    
                 foreach ($fruitsToday as $fruit) {
-                    $assignment->stats = "Selesai";
                     $assignment->fruit_id = $fruit->id; // Handle each fruit's id
+    
+                    // Check the delivery status
+                    if ($fruit->delivery_status == "Dalam Perjalanan") {
+                        $assignment->delivery_status = "Dalam Perjalanan";
+                        $hasDeliveryStatus = true;
+                    } elseif ($fruit->delivery_status == "Pending") {
+                        $assignment->delivery_status = "Pending";
+                    } else {
+                        $assignment->delivery_status = "Selesai";
+                    }
+    
+                    // Check if the tarikh is set for today
+                    if ($fruit->tarikh && Carbon::parse($fruit->tarikh)->isToday()) {
+                        $status = "Selesai";
+                    }else{
+                        $status = "Pending";
+                    }
                 }
+    
+                // Set the status based on fruits found today
+                $assignment->stats = $status;
             } else {
                 $assignment->stats = "Pending";
             }
         }
+    
         $page = "assignment-list";
-
         return view('admin.assignment-list', compact('assignments', 'page'));
     }
 

@@ -23,7 +23,8 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $page="Dashboard";
+    return view('dashboard', compact('page'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -55,6 +56,8 @@ Route::prefix('super')->group(function () {
 
 Route::prefix('mandor')->group(function () {
     Route::put('/edit-current-fruit-details', [MandorController::class, 'editCurrentFruitDetails'])->name('mandor-edit-current-fruit-details');
+    Route::get('/driver-confirm/{assignment_id}', [MandorController::class, 'getDriverPage'])->name('driver-confirmation');
+    Route::post('/driver-selection/{selection}/{assignment_id}', [MandorController::class, 'getDriverAnswer'])->name('driver-answer');
 });
 
 Route::get('/user/update-fruit-details/{assignment_id}', [MandorController::class, 'updateFruitDetails'])->name('mandor-update-fruit-details'); 

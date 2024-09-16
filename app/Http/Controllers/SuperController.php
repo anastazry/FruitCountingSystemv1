@@ -9,7 +9,8 @@ use Maatwebsite\Excel\Facades\Excel;
 class SuperController extends Controller
 {
     public function viewReport(){
-        return view('super.reporting');
+        $page = "view-report";
+        return view('super.reporting', compact('page'));
     }
     
     public function export() 

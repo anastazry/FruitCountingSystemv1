@@ -1,7 +1,16 @@
 @extends('layouts.app')
 @section('content')
 
-{{-- <form method="GET" action="{{ route('products.index') }}" class="mb-6"> --}}
+<div class=" bg-white lg:flex lg:items-center lg:justify-between rounded-lg" >
+    <div class="min-w-0 flex-1 px-1" style="height:20%">
+      <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">Laporan</h2>
+      <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
+    </div>
+    </div>
+  </div>
+<form method="GET" action="#" class="mb-6">
+
+      
     <div class="flex flex-wrap gap-4">
         <input type="text" name="name" placeholder="Name" value="{{ request('name') }}" class="p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
         
@@ -30,12 +39,15 @@
         </select>
         
         <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">Filter</button>
+        <div class="ml-auto h-full py-3">
+            <a href="{{ route('exportUsers') }}" class="bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">Export Excel</a>
+        </div>
     </div>
 </form>
-<a href="{{route('exportUsers')}}">Download</a>
+{{-- <a href="{{route('exportUsers')}}">Download</a> --}}
 
 <div class="overflow-x-auto">
-    <table class="min-w-full divide-y divide-gray-200 bg-white shadow-md rounded-md">
+    <table class="min-w-full divide-y divide-gray-200 bg-white shadow-md rounded-md table-auto">
         <thead class="bg-gray-100">
             <tr>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-800uppercase tracking-wider">No.</th>
