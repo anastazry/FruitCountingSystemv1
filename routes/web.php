@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MandorController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SuperController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,5 +59,6 @@ Route::prefix('mandor')->group(function () {
 
 Route::get('/user/update-fruit-details/{assignment_id}', [MandorController::class, 'updateFruitDetails'])->name('mandor-update-fruit-details'); 
 Route::post('/user/insert-fruit-details/', [MandorController::class, 'insertFruitDetails'])->name('mandor-insert-fruit-details'); 
-
+Route::get('/user/view-report/', [SuperController::class, 'viewReport'])->name('user-view-report'); 
+Route::get('users/export/', [SuperController::class, 'export'])->name('exportUsers');
 require __DIR__.'/auth.php';
