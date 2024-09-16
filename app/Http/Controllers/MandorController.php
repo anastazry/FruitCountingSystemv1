@@ -192,27 +192,44 @@ class MandorController extends Controller
     }
     public function updateFruitDetails(Request $request, $assignment_id)
     {
+        // Find the MandorAssignment by its ID
         $metadataMandor = MandorAssignment::find($assignment_id);
+    
+        // Check if the assignment exists
+        if (!$metadataMandor) {
+            return abort(404, 'Assignment not found');
+        }
     
         // Check if the user is authenticated
         if (Auth::check()) {
-            $fruitToday = DB::table('fruits_detaile_tbl')
-            ->where('assignment_id', $assignment_id)
-            ->whereDate('tarikh', Carbon::today())
-            ->first(); 
-            if($fruitToday){
-                return view('mandor.update-fruit', compact('metadataMandor', 'fruitToday'));
-            }else{
-                return view('mandor.update-fruit', ['metadataMandor' => $metadataMandor]);
+            // Get the currently authenticated user
+            $user = Auth::user();
+    
+            if ($user->role == "Mandor") {
+                // Retrieve the fruit details for today based on assignment ID
+                $fruitToday = DB::table('fruits_detaile_tbl')
+                    ->where('assignment_id', $assignment_id)
+                    ->whereDate('tarikh', Carbon::today())
+                    ->first();
+    
+                // Return the appropriate view based on whether fruit details are available
+                if ($fruitToday) {
+                    return view('mandor.update-fruit', compact('metadataMandor', 'fruitToday'));
+                } else {
+                    return view('mandor.update-fruit', ['metadataMandor' => $metadataMandor]);
+                }
+            } elseif ($user->role == "Pemandu") {
+                return view('mandor.driver-confirm', compact('metadataMandor'));
+            } else {
+                // Handle other roles or redirect as needed
+                return abort(403, 'Unauthorized action.');
             }
-            // User is logged in, show the form
         } else {
             // User is not logged in, redirect to login with a callback URL
             return Redirect::route('login', ['redirect' => url()->current()]);
         }
     }
     
-
     public function editFruitDetails($assignment_id, $fruit_id)
     {
         // Fetch the assignment and fruit details
