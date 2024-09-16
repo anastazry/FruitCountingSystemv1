@@ -63,7 +63,6 @@ class MandorController extends Controller
             $fruit->panjang = $request->panjang;
             $fruit->s_lama = $request->s_lama;
             $fruit->s_baru = $request->s_baru;
-            $fruit->status = "Selesai";
             $fruit->tarikh = now();
     
             if ($request->hasFile('gambar')) {
