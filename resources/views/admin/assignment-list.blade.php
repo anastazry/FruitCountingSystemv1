@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
+
       <!-- Card -->
       <div class="flex flex-col">
         <div class="-m-1.5 overflow-x-auto">
@@ -8,9 +10,9 @@
           <div class="p-1.5 min-w-full inline-block align-middle">
             <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-neutral-800 dark:border-neutral-700">
                           <!-- Calendar -->
-<div class="p-3 space-y-0.5">
+<div class="p-3 space-y-0.5 items-center"  >
   <!-- Months -->
-  <div class="grid grid-cols-5 items-center gap-x-3 mx-1.5 pb-3" >
+  <div class="grid grid-cols-5 items-center gap-x-3 mx-1.5 pb-3"  >
     <!-- Prev Button -->
     <div class="col-span-1">
       <button id="prev-month" type="button" class="size-8 flex justify-center items-center text-gray-800 hover:bg-gray-100 rounded-full" aria-label="Previous">
@@ -74,7 +76,7 @@
   <!-- Months -->
 
   <!-- Weeks -->
-  <div class="grid grid-cols-7 text-center text-sm text-gray-500 dark:text-neutral-500">
+  <div class="grid grid-cols-7 text-center text-sm text-gray-500 dark:text-neutral-500" style="margin-left: 7%">
     <span class="m-px w-10 block text-center text-sm text-gray-500 dark:text-neutral-500" >
       Mo
     </span>
@@ -100,7 +102,7 @@
   <!-- Weeks -->
 
   <!-- Days -->
-  <div class="grid grid-cols-7">
+  <div class="grid grid-cols-7" style="margin-left: 7%">
     <div>
       <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200" disabled>
         26
@@ -127,20 +129,26 @@
       </button>
     </div>
     <div>
+      <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200" disabled>
+        31
+      </button>
+    </div>
+    <div>
       <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
         1
       </button>
     </div>
+
+  </div>
+  <!-- Days -->
+
+  <!-- Days -->
+  <div class="grid grid-cols-7" style="margin-left: 7%">
     <div>
       <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
         2
       </button>
     </div>
-  </div>
-  <!-- Days -->
-
-  <!-- Days -->
-  <div class="grid grid-cols-7">
     <div>
       <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
         3
@@ -171,56 +179,64 @@
         8
       </button>
     </div>
-    <div >
-      <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
-        9
-      </button>
-    </div>
+
   </div>
   <!-- Days -->
 
   <!-- Days -->
-  <div class="grid grid-cols-7">
+  <div class="grid grid-cols-7" style="margin-left: 7%">
     <div >
-      <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
+      <button type="button" class="bg-green-600 m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
+        9
+      </button>
+    </div>
+    <div >
+      <button type="button" class="bg-green-600 m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
         10
       </button>
     </div>
     <div >
-      <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
+      <button type="button" class="bg-green-600 m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
         11
       </button>
     </div>
-    <div >
-      <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
-        12
-      </button>
+    <div>
+      <a href="{{ route('admin.missing-assignment-1') }}">
+        <button type="button" class="bg-red-600 m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
+          12
+        </button>
+      </a>
+    </div>
+    
+    <div>
+      <a href="{{ route('admin.missing-assignment-2') }}">
+        <button type="button" class="bg-red-600 m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
+          13
+        </button>
+      </a>
+
     </div>
     <div>
-      <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
-        13
-      </button>
-    </div>
-    <div>
-      <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
+      <button type="button" class=" bg-green-600 m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
         14
       </button>
     </div>
     <div>
-      <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
+      <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200 bg-green-600">
         15
       </button>
     </div>
+
+  </div>
+  <!-- Days -->
+
+  <!-- Days -->
+  <div class="grid grid-cols-7" style="margin-left: 7%">
     <div>
       <button type="button" class=" bg-blue-600 m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
         16
       </button>
     </div>
-  </div>
-  <!-- Days -->
-
-  <!-- Days -->
-  <div class="grid grid-cols-7">
     <div>
       <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
         17
@@ -251,16 +267,17 @@
         22
       </button>
     </div>
+
+  </div>
+  <!-- Days -->
+
+  <!-- Days -->
+  <div class="grid grid-cols-7" style="margin-left: 7%">
     <div>
       <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
         23
       </button>
     </div>
-  </div>
-  <!-- Days -->
-
-  <!-- Days -->
-  <div class="grid grid-cols-7">
     <div>
       <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
         24
@@ -291,16 +308,17 @@
         29
       </button>
     </div>
+
+  </div>
+  <!-- Days -->
+
+  <!-- Days -->
+  <div class="grid grid-cols-7" style="margin-left: 7%">
     <div >
       <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
         30
       </button>
     </div>
-  </div>
-  <!-- Days -->
-
-  <!-- Days -->
-  <div class="grid grid-cols-7">
     <div >
       <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
         31
@@ -331,15 +349,13 @@
         5
       </button>
     </div>
-    <div>
-      <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 hover:border-blue-600 hover:text-blue-600 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-100 dark:text-neutral-200 dark:hover:border-neutral-500 dark:focus:bg-neutral-700" disabled>
-        6
-      </button>
-    </div>
+
   </div>
   <!-- Days -->
 </div>
+
             </div>
+            <br>
             <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-neutral-800 dark:border-neutral-700">
               <!-- Header -->
               <div class="px-4 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
@@ -354,6 +370,7 @@
 
                 <div>
                   <div class="inline-flex gap-x-2">
+                    @if(Auth::check() && Auth::user()->role == "Admin")
                     <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" href="{{ route('admin.create-qr') }}">
                       <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M5 12h14" />
@@ -361,6 +378,7 @@
                       </svg>
                       Tambah Tugasan
                     </a>
+                    @endif
                   </div>
                 </div>
               </div>
@@ -422,7 +440,7 @@
                         </div>
                       </th>
 
-                      <th scope="col" class="px-4 py-3 text-center">Actions</th>
+                      <th scope="col" class="px-4 py-3 text-center">Aksi</th>
                     </tr>
                   </thead>
 
@@ -465,35 +483,42 @@
                           <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{$assignment->n_p_tuai}}</span>
                         </td>
                         <td class="size-px whitespace-nowrap px-4 py-3">
-                          @if($assignment->status == 'pending')
+                          @if($assignment->stats == 'Selesai')
                             <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
                               <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                               </svg>
-                              Pending
+                              Selesai
                             </span>
                           @else
                             <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-red-100 text-red-800 rounded-full dark:bg-red-500/10 dark:text-red-500">
                               <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                                 <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6.002a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
                               </svg>
-                              Selesai
+                              Belum Selesai
                             </span>
                           @endif
                         </td>
                         <td class="h-px w-px whitespace-nowrap text-center">
-                          <a class="inline-flex items-center gap-x-1.5 text-sm font-medium text-blue-600 decoration-2 hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 dark:text-blue-500 dark:focus:ring-offset-neutral-800" href="{{ route('mandor-update-fruit-details', ['assignment_id' => $assignment->id]) }}">
-                            Update
+                          @if($assignment->stats == 'Selesai')
+                          <a class="inline-flex items-center gap-x-1.5 text-sm font-medium text-blue-600 decoration-2 hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 dark:text-blue-500 dark:focus:ring-offset-neutral-800" href="{{ route('editFruitDetails', ['assignment_id' => $assignment->id, 'fruit_id' => $assignment->fruit_id]) }}">
+                            Ubah
                           </a>
+                          @else
+                          <a class="inline-flex items-center gap-x-1.5 text-sm font-medium text-blue-600 decoration-2 hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 dark:text-blue-500 dark:focus:ring-offset-neutral-800" href="{{ route('mandor-update-fruit-details', ['assignment_id' => $assignment->id]) }}">
+                            Mula
+                          </a>
+                          @endif
                           <br>
+                          @if(Auth::check() && Auth::user()->role == "Admin")
                           <a class="inline-flex items-center gap-x-1.5 text-sm font-medium text-blue-600 decoration-2 hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 dark:text-blue-500 dark:focus:ring-offset-neutral-800" href="{{ route('admin.create-qrcode', ['assignment_id' => $assignment->id]) }}">
                             Print QR
                           </a>
                           <br>
-
-                          <a class="inline-flex items-center gap-x-1.5 text-sm font-medium text-blue-600 decoration-2 hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 dark:text-blue-500 dark:focus:ring-offset-neutral-800" href="{{ route('admin.update-assignment', ['assignment_id' => $assignment->id]) }}">
-                            Edit
-                          </a>
+                            <a class="inline-flex items-center gap-x-1.5 text-sm font-medium text-blue-600 decoration-2 hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 dark:text-blue-500 dark:focus:ring-offset-neutral-800" href="{{ route('admin.update-assignment', ['assignment_id' => $assignment->id]) }}">
+                              Edit
+                            </a>
+                          @endif
                         </td>
                       </tr>
                     @endforeach

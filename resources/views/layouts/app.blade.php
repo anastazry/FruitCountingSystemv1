@@ -176,32 +176,19 @@
             <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700 dark:divide-neutral-700 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full" role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-account">
               <div class="py-3 px-5 bg-gray-100 rounded-t-lg dark:bg-neutral-700">
                 <p class="text-sm text-gray-500 dark:text-neutral-500">Signed in as</p>
-                <p class="text-sm font-medium text-gray-800 dark:text-neutral-200">james@site.com</p>
-              </div>
+              @if(Auth::check())
+
+                <p class="text-sm font-medium text-gray-800 dark:text-neutral-200">{{Auth::user()->name}}</p>
+                @endif
               <div class="p-1.5 space-y-0.5">
                 <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="#">
                   <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
                     <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
                   </svg>
-                  Newsletter
+                  Profile
                 </a>
-                <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="#">
-                  <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
-                    <path d="M3 6h18" />
-                    <path d="M16 10a4 4 0 0 1-8 0" />
-                  </svg>
-                  Purchases
-                </a>
-                <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="#">
-                  <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
-                    <path d="M12 12v9" />
-                    <path d="m8 17 4 4 4-4" />
-                  </svg>
-                  Downloads
-                </a>
+
                 <form action=""></form>
                 <form method="POST" action="{{ route('logout') }}">
                   @csrf
@@ -289,6 +276,7 @@
           <ul class="flex flex-col space-y-1">
               @if(Auth::check() && Auth::user()->role == "Admin")
             <li>
+                @if(isset($page) && $page == "Dashboard")
               <a class="flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-700 dark:text-white" href="{{route('dashboard')}}">
                 <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
@@ -296,48 +284,77 @@
                 </svg>
                 Dashboard
               </a>
+              @else
+              <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-700 dark:text-white" href="{{route('dashboard')}}">
+                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                  <polyline points="9 22 9 12 15 12 15 22" />
+                </svg>
+                Dashboard
+              </a>
+              @endif
             </li>
+
+
             <li>
-              <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300" href="{{route('admin.create-qr')}}">
+                @if(isset($page) && $page == "assignment-list")
+                    <a class="bg-gray-100 w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300" href="{{route('admin.assign-list')}}">
+                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                        </svg>
+                        Tambah Tugasan
+                    </a>
+                @else
+                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300" href="{{route('admin.assign-list')}}">
+                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                        </svg>
+                        Tambah Tugasan
+                </a>
+                @endif
+            </li>
+
+            <li>
+              <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300" href="{{route('admin-users-registration-form')}}">
                 <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
                   <circle cx="9" cy="7" r="4" />
                   <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
                   <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                 </svg>
-                <span>Users</span>
-
-              </a>
-            </li>
-
-            <li>
-              <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300" href="{{route('admin.assign-list')}}">
-                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-                </svg>
-                Tambah Tugasan
-              </a>
-            </li>
-
-            <li>
-              <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300" href="{{route('admin-users-registration-form')}}">
-                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-                </svg>
-                Create User
+                Tambah Pengguna
               </a>
             </li>
             @else
             <li>
-              <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300" href="{{route('admin.assign-list')}}">
+                @if(isset($page) && $page == "Dashboard")
+              <a class="flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-700 dark:text-white" href="{{route('dashboard')}}">
                 <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                  <polyline points="9 22 9 12 15 12 15 22" />
                 </svg>
-                Create User
+                Dashboard
               </a>
+              @else
+              <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-700 dark:text-white" href="{{route('dashboard')}}">
+                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                  <polyline points="9 22 9 12 15 12 15 22" />
+                </svg>
+                Dashboard
+              </a>
+              @endif
+            </li>
+            <li>
+                <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300" href="{{route('admin.assign-list')}}">
+                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                        </svg>
+                        Lihat Tugasan
+                </a>
             </li>
             @endif
           </ul>
@@ -381,193 +398,209 @@
   <script src="https://preline.co/assets/js/hs-apexcharts-helpers.js"></script>
 
   <script>
-    window.addEventListener("load", () => {
-      (function () {
-        buildChart(
-          "#hs-multiple-bar-charts",
-          (mode) => ({
-            chart: {
-              type: "bar",
-              height: 300,
-              toolbar: {
-                show: false,
-              },
-              zoom: {
-                enabled: false,
-              },
-            },
-            series: [
-              {
-                name: "Chosen Period",
-                data: [
-                  23000, 44000, 55000, 57000, 56000, 61000, 58000, 63000, 60000,
-                  66000, 34000, 78000,
-                ],
-              },
-              {
-                name: "Last Period",
-                data: [
-                  17000, 76000, 85000, 101000, 98000, 87000, 105000, 91000, 114000,
-                  94000, 67000, 66000,
-                ],
-              },
-            ],
-            plotOptions: {
-              bar: {
-                horizontal: false,
-                columnWidth: "16px",
-                borderRadius: 0,
-              },
-            },
-            legend: {
+  window.addEventListener("load", () => {
+    (function () {
+      buildChart(
+        "#hs-multiple-bar-charts",
+        (mode) => ({
+          chart: {
+            type: "bar",
+            height: 300,
+            toolbar: {
               show: false,
             },
-            dataLabels: {
+            zoom: {
               enabled: false,
             },
-            stroke: {
-              show: true,
-              width: 8,
-              colors: ["transparent"],
-            },
-            xaxis: {
-              categories: [
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July",
-                "August",
-                "September",
-                "October",
-                "November",
-                "December",
+          },
+          series: [
+            {
+              name: "MUDA",
+              data: [
+                25000, 50000, 60000, 58000, 57000, 62000, 59000, 64000, 61000,
+                
               ],
-              axisBorder: {
-                show: false,
+            },
+            {
+              name: "BUSUK",
+              data: [
+                18000, 78000, 86000, 102000, 99000, 88000, 106000, 92000, 115000,
+                
+              ],
+            },
+            {
+              name: "PANJANG",
+              data: [
+                20000, 79000, 87000, 103000, 100000, 89000, 107000, 93000, 116000,
+                
+              ],
+            },
+            {
+              name: "KOSONG",
+              data: [
+                22000, 80000, 88000, 104000, 101000, 90000, 108000, 94000, 117000,
+                
+              ],
+            },
+          ],
+          plotOptions: {
+            bar: {
+              horizontal: false,
+              columnWidth: "16px",
+              borderRadius: 0,
+            },
+          },
+          legend: {
+            show: false,
+          },
+          dataLabels: {
+            enabled: false,
+          },
+          stroke: {
+            show: true,
+            width: 8,
+            colors: ["transparent"],
+          },
+          xaxis: {
+            categories: [
+              "January",
+              "February",
+              "March",
+              "April",
+              "May",
+              "June",
+              "July",
+              "August",
+              "September",
+              "October",
+              "November",
+              "December",
+            ],
+            axisBorder: {
+              show: false,
+            },
+            axisTicks: {
+              show: false,
+            },
+            crosshairs: {
+              show: false,
+            },
+            labels: {
+              style: {
+                colors: "#9ca3af",
+                fontSize: "13px",
+                fontFamily: "Inter, ui-sans-serif",
+                fontWeight: 400,
               },
-              axisTicks: {
-                show: false,
+              offsetX: -2,
+              formatter: (title) => title.slice(0, 3),
+            },
+          },
+          yaxis: {
+            labels: {
+              align: "left",
+              minWidth: 0,
+              maxWidth: 140,
+              style: {
+                colors: "#9ca3af",
+                fontSize: "13px",
+                fontFamily: "Inter, ui-sans-serif",
+                fontWeight: 400,
               },
-              crosshairs: {
-                show: false,
-              },
-              labels: {
-                style: {
-                  colors: "#9ca3af",
-                  fontSize: "13px",
-                  fontFamily: "Inter, ui-sans-serif",
-                  fontWeight: 400,
-                },
-                offsetX: -2,
-                formatter: (title) => title.slice(0, 3),
+              formatter: (value) => (value >= 1000 ? `${Math.round(value / 1000)}k` : value),
+            },
+          },
+          states: {
+            hover: {
+              filter: {
+                type: "darken",
+                value: 0.9,
               },
             },
-            yaxis: {
-              labels: {
-                align: "left",
-                minWidth: 0,
-                maxWidth: 140,
-                style: {
-                  colors: "#9ca3af",
-                  fontSize: "13px",
-                  fontFamily: "Inter, ui-sans-serif",
-                  fontWeight: 400,
-                },
-                formatter: (value) => (value >= 1000 ? `${value / 1000}k` : value),
-              },
+          },
+          tooltip: {
+            y: {
+              formatter: (value) => (value >= 1000 ? `${Math.round(value / 1000)}k` : value), // Format tooltip value
             },
-            states: {
-              hover: {
-                filter: {
-                  type: "darken",
-                  value: 0.9,
-                },
-              },
-            },
-            tooltip: {
-              y: {
-                formatter: (value) =>
-                  `$${value >= 1000 ? `${value / 1000}k` : value}`,
-              },
-              custom: function (props) {
-                const { categories } = props.ctx.opts.xaxis;
-                const { dataPointIndex } = props;
-                const title = categories[dataPointIndex];
-                const newTitle = `${title}`;
+            custom: function (props) {
+              const { categories } = props.ctx.opts.xaxis;
+              const { dataPointIndex } = props;
+              const title = categories[dataPointIndex];
+              const newTitle = `${title}`;
 
-                return buildTooltip(props, {
-                  title: newTitle,
-                  mode,
-                  hasTextLabel: true,
-                  wrapperExtClasses: "min-w-28",
-                  labelDivider: ":",
-                  labelExtClasses: "ms-2",
-                });
-              },
+              return buildTooltip(props, {
+                title: newTitle,
+                mode,
+                hasTextLabel: true,
+                wrapperExtClasses: "min-w-28",
+                labelDivider: ":",
+                labelExtClasses: "ms-2",
+              });
             },
-            responsive: [
-              {
-                breakpoint: 568,
-                options: {
-                  chart: {
-                    height: 300,
+          },
+          responsive: [
+            {
+              breakpoint: 568,
+              options: {
+                chart: {
+                  height: 300,
+                },
+                plotOptions: {
+                  bar: {
+                    columnWidth: "14px",
                   },
-                  plotOptions: {
-                    bar: {
-                      columnWidth: "14px",
-                    },
+                },
+                stroke: {
+                  width: 8,
+                },
+                labels: {
+                  style: {
+                    colors: "#9ca3af",
+                    fontSize: "11px",
+                    fontFamily: "Inter, ui-sans-serif",
+                    fontWeight: 400,
                   },
-                  stroke: {
-                    width: 8,
-                  },
+                  offsetX: -2,
+                  formatter: (title) => title.slice(0, 3),
+                },
+                yaxis: {
                   labels: {
+                    align: "left",
+                    minWidth: 0,
+                    maxWidth: 140,
                     style: {
                       colors: "#9ca3af",
                       fontSize: "11px",
                       fontFamily: "Inter, ui-sans-serif",
                       fontWeight: 400,
                     },
-                    offsetX: -2,
-                    formatter: (title) => title.slice(0, 3),
-                  },
-                  yaxis: {
-                    labels: {
-                      align: "left",
-                      minWidth: 0,
-                      maxWidth: 140,
-                      style: {
-                        colors: "#9ca3af",
-                        fontSize: "11px",
-                        fontFamily: "Inter, ui-sans-serif",
-                        fontWeight: 400,
-                      },
-                      formatter: (value) =>
-                        value >= 1000 ? `${value / 1000}k` : value,
-                    },
+                    formatter: (value) =>
+                      value >= 1000 ? `${Math.round(value / 1000)}k` : value,
                   },
                 },
               },
-            ],
-          }),
-          {
-            colors: ["#2563eb", "#d1d5db"],
-            grid: {
-              borderColor: "#e5e7eb",
             },
+          ],
+        }),
+        {
+          colors: ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728"], // Colors for each series
+          grid: {
+            borderColor: "#e5e7eb",
           },
-          {
-            colors: ["#6b7280", "#2563eb"],
-            grid: {
-              borderColor: "#404040",
-            },
-          }
-        );
-      })();
-    });
-  </script>
+        },
+        {
+          colors: ["#6b7280", "#2563eb"],
+          grid: {
+            borderColor: "#404040",
+          },
+        }
+      );
+    })();
+  });
+</script>
+
+
+
   <script>
     window.addEventListener("load", () => {
       (function () {
@@ -576,7 +609,7 @@
           (mode) => ({
             chart: {
               height: 300,
-              type: "area",
+              type: "line",
               toolbar: {
                 show: false,
               },
@@ -585,10 +618,23 @@
               },
             },
             series: [
-              {
-                name: "Visitors",
-                data: [180, 51, 60, 38, 88, 50, 40, 52, 88, 80, 60, 70],
-              },
+
+  {
+    name: "JUMLAH MUDA",
+    data: [396435, 99725, 407674, 129268, 186440, 339714, 118327],
+  },
+  {
+    name: "JUMLAH BUSUK",
+    data: [159525, 211190, 236552, 341333, 218312, 300224, 137268],
+  },
+  {
+    name: "JUMLAH PANJANG",
+    data: [164243, 341756, 210593, 352964, 341807, 182713, 320571],
+  },
+  {
+    name: "JUMLAH KOSONG",
+    data: [262124, 317569, 396420, 222979, 352140, 245361, 404740],
+  },
             ],
             legend: {
               show: false,
@@ -616,18 +662,13 @@
               type: "category",
               tickPlacement: "on",
               categories: [
-                "25 January 2023",
-                "26 January 2023",
-                "27 January 2023",
-                "28 January 2023",
-                "29 January 2023",
-                "30 January 2023",
-                "31 January 2023",
-                "1 February 2023",
-                "2 February 2023",
-                "3 February 2023",
-                "4 February 2023",
-                "5 February 2023",
+                "10 Sep 2024",
+                "11 Sep 2024",
+                "12 Sep 2024",
+                "13 Sep 2024",
+                "14 Sep 2024",
+                "15 Sep 2024",
+                "16 Sep 2024",
               ],
               axisBorder: {
                 show: false,

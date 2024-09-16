@@ -6,9 +6,23 @@
     <div class="py-12" style="width: 100%">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8" style="width: 100%">
             <div class="bg-white border rounded shadow p-4" >
+                <div class="border-b p-2">
+                  <!-- Header content goes here -->
+                  <h1>
+                    Peringkat : {{$metadataMandor->peringkat}}
+                  </h1>
+                  <h1>
+                    Blok : {{$metadataMandor->blok}}
+                  </h1>
+                  <h1>
+                    No Platform : {{$metadataMandor->blok}}
+                  </h1>
+                </div>
+            </div>
+            <div class="bg-white border rounded shadow p-4" >
               <div class="border-b p-2">
                 <!-- Header content goes here -->
-                Senarai Makanan
+                Jumlah Tandan 
               </div>
               <div class="p-2">
                 <!-- Body content goes here -->
@@ -19,41 +33,47 @@
                   </div>
 
                 @endif
-                    <form method="POST" action="{{ route('mandor-insert-fruit-details') }}" enctype="multipart/form-data">
-                        @csrf
+                @if(isset($fruitToday))
+                <form method="POST" action="{{ route('mandor-edit-current-fruit-details') }}" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT') 
+                @else
+                <form method="POST" action="{{ route('mandor-insert-fruit-details') }}" enctype="multipart/form-data">
+                    @csrf
+                @endif
                 
                         <!-- dituai  -->
                         <div>
                             <x-input-label for="dituai" :value="__('Tandan Dituai')" />
-                            
-                            <x-text-input id="dituai" class="block mt-1 w-full" type="text" name="dituai" :value="old('dituai')" required autofocus autocomplete="username" />
+                            <x-text-input id="dituai" class="block mt-1 w-full" type="text" name="dituai" 
+                                :value="old('dituai', $fruitToday->dituai ?? '')" required autofocus autocomplete="username" />
                             <x-input-error :messages="$errors->get('dituai')" class="mt-2" />
                         </div>
                 
                         <!-- Email Address -->
                         <div class="mt-4">
                             <x-input-label for="muda" :value="__('Tandan Muda')" />
-                            <x-text-input id="muda" class="block mt-1 w-full" type="text" name="muda" :value="old('muda')" required autocomplete="username" />
+                            <x-text-input id="muda" class="block mt-1 w-full" type="text" name="muda" :value="old('muda', $fruitToday->muda ?? '')" required autocomplete="username" />
                             <x-input-error :messages="$errors->get('muda')" class="mt-2" />
                         </div>
                 
                         <!-- Worker ID -->
                         <div class="mt-4">
                             <x-input-label for="busuk" :value="__('Tandan Busuk')" />
-                            <x-text-input id="busuk" class="block mt-1 w-full" type="text" name="busuk" :value="old('busuk')" required autocomplete="username" />
+                            <x-text-input id="busuk" class="block mt-1 w-full" type="text" name="busuk" :value="old('busuk', $fruitToday->busuk ?? '')" required autocomplete="username" />
                             <x-input-error :messages="$errors->get('busuk')" class="mt-2" />
                         </div>
 
                         <!-- Username -->
                         <div class="mt-4">
                             <x-input-label for="kosong" :value="__('Tandan Kosong')" />
-                            <x-text-input id="kosong" class="block mt-1 w-full" type="text" name="kosong" :value="old('kosong')" required autocomplete="username" />
+                            <x-text-input id="kosong" class="block mt-1 w-full" type="text" name="kosong" :value="old('kosong', $fruitToday->kosong ?? '')" required autocomplete="username" />
                             <x-input-error :messages="$errors->get('kosong')" class="mt-2" />
                         </div>
                         <!-- Phone Number -->
                         <div class="mt-4">
                             <x-input-label for="panjang" :value="__('Tandan Panjang')" />
-                            <x-text-input id="panjang" class="block mt-1 w-full" type="text" name="panjang" :value="old('panjang')" required autocomplete="username" />
+                            <x-text-input id="panjang" class="block mt-1 w-full" type="text" name="panjang" :value="old('panjang', $fruitToday->panjang ?? '')" required autocomplete="username" />
                             <x-input-error :messages="$errors->get('panjang')" class="mt-2" />
                         </div>
                     </div>
@@ -69,13 +89,13 @@
                     <!-- Phone Number -->
                     <div class="mt-4">
                         <x-input-label for="s_lama" :value="__('Serangan Lama')" />
-                        <x-text-input id="s_lama" class="block mt-1 w-full" type="text" name="s_lama" :value="old('s_lama')" required autocomplete="username" />
+                        <x-text-input id="s_lama" class="block mt-1 w-full" type="text" name="s_lama" :value="old('s_lama', $fruitToday->s_lama ?? '')" required autocomplete="username" />
                         <x-input-error :messages="$errors->get('s_lama')" class="mt-2" />
                     </div>
                     <!-- Phone Number -->
                     <div class="mt-4">
                         <x-input-label for="s_baru" :value="__('Serangan Baru')" />
-                        <x-text-input id="s_baru" class="block mt-1 w-full" type="text" name="s_baru" :value="old('s_baru')" required autocomplete="username" />
+                        <x-text-input id="s_baru" class="block mt-1 w-full" type="text" name="s_baru" :value="old('s_baru', $fruitToday->s_baru ?? '')" required autocomplete="username" />
                         <x-input-error :messages="$errors->get('s_baru')" class="mt-2" />
                     </div>
                 </div>
@@ -92,10 +112,21 @@
 
                         <!-- Phone Number -->
                         <div class="mt-4">
+                            @if(isset($fruitToday->image_path))
+                                <img src="{{ asset('storage/'.$fruitToday->image_path) }}" alt="Fruit Image" class="w-32 h-32 object-cover">
+                            @endif
                             <x-input-label for="gambar" :value="__('Gambar')" />
-                            <x-text-input id="gambar" class="block mt-1 w-full" type="file" name="gambar" :value="old('gambar')" required autocomplete="username" />
+                            <x-text-input id="gambar" class="block mt-1 w-full" type="file" name="gambar" autocomplete="username" />
                             <x-input-error :messages="$errors->get('gambar')" class="mt-2" />
-                        </div>
+                                @if(isset($fruitToday->image_path))
+                                    <input type="hidden" name="current_image_path" value="{{ $fruitToday->image_path }}">
+                                @endif
+                                @if(isset($fruitToday))
+                                    <input type="hidden" name="fruit_id" value="{{ $fruitToday->id }}">
+                                @endif
+                            </div>
+
+                        
                         <!-- Phone Number -->
 
                         <br><br>

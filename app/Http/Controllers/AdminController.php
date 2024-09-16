@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\MandorAssignment;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -13,29 +15,52 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class AdminController extends Controller
 {
     public function returnSuperView(){
-        return view('super.dashboard-super');
+        $page = "Dashboard";
+        return view('super.dashboard-super', compact('page'));
     }
     public function getAssignmentList(){
         $assignments = MandorAssignment::all();
         // dd($assignments);
-        return view('admin.assignment-list', compact('assignments'));
+        foreach ($assignments as $assignment) {
+            // Query the fruits table using assignment_id and created_at for today
+            $fruitsToday = DB::table('fruits_detaile_tbl')
+                ->where('assignment_id', $assignment->id)
+                ->whereDate('created_at', Carbon::today())
+                ->get(); // Get a collection of results
+    
+            if ($fruitsToday->isNotEmpty()) {
+                // Iterate over fruits found today
+                foreach ($fruitsToday as $fruit) {
+                    $assignment->stats = "Selesai";
+                    $assignment->fruit_id = $fruit->id; // Handle each fruit's id
+                }
+            } else {
+                $assignment->stats = "Pending";
+            }
+        }
+        $page = "assignment-list";
+
+        return view('admin.assignment-list', compact('assignments', 'page'));
     }
 
     public function createQR(){
         $users = User::all();
         $breadcrumb1 = "Manage Users";
         $headings = "Manage Users";
-        return view('admin.create-qr', compact('users','breadcrumb1', 'headings'));
+        $page = "generate-assignment";
+        return view('admin.create-qr', compact('users','breadcrumb1', 'headings','page'));
     }
 
     public function getAllUserList(){
         $users = User::all();
         $breadcrumb1 = "Manage Users";
         $headings = "Manage Users";
-        return view('admin.users-list', compact('users','breadcrumb1', 'headings'));
+        $page = "users";
+        return view('admin.users-list', compact('users','breadcrumb1', 'headings','page'));
     }
     public function returnRegisterNewUserPage(){
-        return view('admin.create-newuser');
+        $page = "new-user";
+        return view('admin.create-newuser', compact('page'));
     }
     public function registerUser(Request $request)
     {
@@ -66,7 +91,8 @@ class AdminController extends Controller
         ]);
         $user->save();
         // dd ($user);
-        return view('dashboard');
+        $page = "Dashboard";
+        return view('dashboard', compact('page'));
 
         // return redirect()->route('admin.create-newuser')->with('message', 'User registered successfully');
     }
@@ -148,8 +174,8 @@ class AdminController extends Controller
 
         // // Use the modified data to create the record
         $mandorAssignment = MandorAssignment::create($validatedData);
-
-        return redirect()->route('dashboard');
+        $page = "Dashboard";
+        return redirect()->route('dashboard')->with($page);
     }
     public function getUpdateAssignmentDetails($assignment_id)
     {

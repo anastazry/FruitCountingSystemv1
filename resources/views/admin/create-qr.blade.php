@@ -8,7 +8,7 @@
             <div class="bg-white border rounded shadow p-4">
               <div class="border-b p-2">
                 <!-- Header content goes here -->
-                Generate QR
+                Informasi Tugasan
               </div>
               <div class="p-2">
                 <!-- Body content goes here -->

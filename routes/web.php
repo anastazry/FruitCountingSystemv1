@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MandorController;
@@ -40,10 +41,19 @@ Route::prefix('admin')->group(function () {
     Route::post('/assign-task', [AdminController::class, 'assignTaskToMandor'])->name('admin.assign-task');
     Route::get('/assignment-lists', [AdminController::class, 'getAssignmentList'])->name('admin.assign-list');
     Route::get('/qr-code{assignment_id}', [MandorController::class, 'generateQRCodePage'])->name('admin.create-qrcode');
+    Route::get('/missing-assignments1', [MandorController::class, 'missingAssignment1'])->name('admin.missing-assignment-1');
+    Route::get('/missing-assignments2', [MandorController::class, 'missingAssignment2'])->name('admin.missing-assignment-2');
+    Route::get('/edit-fruit-details/{assignment_id}/{fruit_id}', [MandorController::class, 'editFruitDetails'])->name('editFruitDetails');
 });
+// web.php
+Route::get('/sales-chart', [AdminController::class, 'showChart'])->name('sales.chart');
 
 Route::prefix('super')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'returnSuperView'])->name('super-dashboard');
+});
+
+Route::prefix('mandor')->group(function () {
+    Route::put('/edit-current-fruit-details', [MandorController::class, 'editCurrentFruitDetails'])->name('mandor-edit-current-fruit-details');
 });
 
 Route::get('/user/update-fruit-details/{assignment_id}', [MandorController::class, 'updateFruitDetails'])->name('mandor-update-fruit-details'); 

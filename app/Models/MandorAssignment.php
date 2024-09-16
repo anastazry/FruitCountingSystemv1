@@ -25,4 +25,8 @@ class MandorAssignment extends Model
     {
         return $this->belongsTo(User::class, 'mandor_id');
     }
+    public function fruits()
+    {
+        return $this->hasMany(FruitsModel::class, 'assignment_id');
+    }
 }

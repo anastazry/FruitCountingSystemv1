@@ -18,7 +18,7 @@ class FruitsModel extends Model
         'panjang', 
         's_lama', 
         's_baru', 
-        'images-path', 
+        'image_path', 
         'location', 
         'tarikh', 
         'masa', 
