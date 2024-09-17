@@ -239,7 +239,11 @@ class MandorController extends Controller
                     return view('mandor.update-fruit', ['metadataMandor' => $metadataMandor]);
                 }
             } elseif ($user->role == "Pemandu") {
-                return view('mandor.driver-confirm', compact('assignment'));
+                if($fruitToday){
+                    return view('mandor.driver-confirm', compact('assignment'));
+                }else{
+                    return view('mandor.belumselesai');
+                }
             } else {
                 // Handle other roles or redirect as needed
                 return abort(403, 'Unauthorized action.');
