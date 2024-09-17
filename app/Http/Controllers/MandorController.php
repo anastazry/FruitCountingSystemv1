@@ -227,11 +227,12 @@ class MandorController extends Controller
                     ->first();
     
                 // Return the appropriate view based on whether fruit details are available
-                if ($fruitToday) {
+                if ($fruitToday && $fruitToday->delivery_status == "Dalam Perjalanan"){
+                    return view('mandor.redirection-page');
+                }elseif ($fruitToday) {
                     $fruit_id = $fruitToday->id;
                     return redirect()->route('editFruitDetails', ['assignment_id' => $assignment_id, 'fruit_id' => $fruit_id]);
                 } else {
-                    
                     return view('mandor.update-fruit', ['metadataMandor' => $metadataMandor]);
                 }
             } elseif ($user->role == "Pemandu") {
