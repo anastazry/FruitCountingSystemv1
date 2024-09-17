@@ -199,7 +199,7 @@ class MandorController extends Controller
             ->where('assignment_id', $assignment_id)
             ->whereDate('created_at', Carbon::today())
             ->first();
-            
+
         if($fruitToday && isset($fruitToday->delivery_status)){
             return view('mandor.redirection-page');
         }
@@ -220,10 +220,10 @@ class MandorController extends Controller
                     ->where('assignment_id', $assignment_id)
                     ->whereDate('created_at', Carbon::today())
                     ->first();
-                    $fruit_id = $fruitToday->id;
     
                 // Return the appropriate view based on whether fruit details are available
                 if ($fruitToday) {
+                    $fruit_id = $fruitToday->id;
                     return redirect()->route('editFruitDetails', ['assignment_id' => $assignment_id, 'fruit_id' => $fruit_id]);
                 } else {
                     
