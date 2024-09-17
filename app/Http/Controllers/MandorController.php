@@ -239,7 +239,9 @@ class MandorController extends Controller
                     return view('mandor.update-fruit', ['metadataMandor' => $metadataMandor]);
                 }
             } elseif ($user->role == "Pemandu") {
-                if($fruitToday){
+                if($fruitToday && $fruitToday->delivery_status == "Dalam Perjalanan"){
+                    return view('mandor.redirection-page');
+                }elseif($fruitToday){
                     return view('mandor.driver-confirm', compact('assignment'));
                 }else{
                     return view('mandor.belumselesai');
