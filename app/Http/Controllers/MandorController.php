@@ -208,10 +208,6 @@ class MandorController extends Controller
             ->where('assignment_id', $assignment_id)
             ->whereDate('created_at', Carbon::today())
             ->first();
-
-        if($fruitToday && $fruitToday->delivery_status == "Dalam Perjalanan"){
-            return view('mandor.redirection-page');
-        }
     
         // Check if the assignment exists
         if (!$metadataMandor) {
