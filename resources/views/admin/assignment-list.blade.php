@@ -535,11 +535,11 @@
                         <td class="h-px w-px whitespace-nowrap text-center">
                           @if($assignment->stats == 'Selesai' || isset($assignment->delivery_status))
                           <a class="inline-flex items-center gap-x-1.5 text-sm font-medium text-blue-600 decoration-2 hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 dark:text-blue-500 dark:focus:ring-offset-neutral-800" href="{{ route('editFruitDetails', ['assignment_id' => $assignment->id, 'fruit_id' => $assignment->fruit_id]) }}">
-                            Ubah
+                            Ubah Kira
                           </a>
                           @else
                           <a class="inline-flex items-center gap-x-1.5 text-sm font-medium text-blue-600 decoration-2 hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 dark:text-blue-500 dark:focus:ring-offset-neutral-800" href="{{ route('mandor-update-fruit-details', ['assignment_id' => $assignment->id]) }}">
-                            Mula
+                            Mula Kira
                           </a>
                           @endif
                           <br>

@@ -195,6 +195,14 @@ class MandorController extends Controller
         // Find the MandorAssignment by its ID
         $metadataMandor = MandorAssignment::find($assignment_id);
         $assignment = $metadataMandor;
+        $fruitToday = DB::table('fruits_detaile_tbl')
+            ->where('assignment_id', $assignment_id)
+            ->whereDate('created_at', Carbon::today())
+            ->first();
+            
+        if($fruitToday && isset($fruitToday->delivery_status)){
+            return view('mandor.redirection-page');
+        }
     
         // Check if the assignment exists
         if (!$metadataMandor) {
