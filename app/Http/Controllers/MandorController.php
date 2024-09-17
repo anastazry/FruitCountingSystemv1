@@ -214,7 +214,7 @@ class MandorController extends Controller
             // Get the currently authenticated user
             $user = Auth::user();
     
-            if ($user->role == "Mandor") {
+            if ($user->role == "Mandor" || $user->role == "Admin") {
                 // Retrieve the fruit details for today based on assignment ID
                 $fruitToday = DB::table('fruits_detaile_tbl')
                     ->where('assignment_id', $assignment_id)
