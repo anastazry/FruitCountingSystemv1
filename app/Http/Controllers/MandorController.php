@@ -200,7 +200,7 @@ class MandorController extends Controller
             ->whereDate('created_at', Carbon::today())
             ->first();
 
-        if($fruitToday && isset($fruitToday->delivery_status)){
+        if($fruitToday && $fruitToday->delivery_status == "Dalam Perjalanan"){
             return view('mandor.redirection-page');
         }
     
