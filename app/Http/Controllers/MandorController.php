@@ -47,7 +47,16 @@ class MandorController extends Controller
     
     public function getDriverPage($assignment_id){
         $assignment = MandorAssignment::find($assignment_id);
-        return view('mandor.driver-confirm', compact('assignment'));
+        $fruitToday = DB::table('fruits_detaile_tbl')
+        ->where('assignment_id', $assignment_id)
+        ->whereDate('tarikh', Carbon::today())
+        ->first();
+
+        if($fruitToday){
+            return view('mandor.driver-confirm', compact('assignment'));
+        }else{
+            return view('mandor.belumselesai');
+        }
     }
 
     public function editCurrentFruitDetails(Request $request)
