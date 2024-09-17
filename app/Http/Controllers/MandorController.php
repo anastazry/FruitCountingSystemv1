@@ -319,8 +319,9 @@ class MandorController extends Controller
         ]);
         $fruit->save();
         $metadataMandor = MandorAssignment::find($assignment_id);
+        return redirect()->route('admin.assign-list')->with('success', 'Fruit details updated successfully!');
         
-        return view('mandor.update-fruit', compact('fruit', 'metadataMandor'));
+        // return view('mandor.update-fruit', compact('fruit', 'metadataMandor'));
     }
     
     
