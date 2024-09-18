@@ -61,7 +61,7 @@ Route::prefix('mandor')->group(function () {
 });
 
 Route::get('/user/update-fruit-details/{assignment_id}', [MandorController::class, 'updateFruitDetails'])->name('mandor-update-fruit-details'); 
-Route::post('/user/insert-fruit-details/', [MandorController::class, 'insertFruitDetails'])->name('mandor-insert-fruit-details'); 
+Route::get('/user/insert-fruit-details/', [MandorController::class, 'insertFruitDetails'])->name('mandor-insert-fruit-details'); 
 Route::get('/user/view-report/', [SuperController::class, 'viewReport'])->name('user-view-report'); 
 Route::get('users/export/', [SuperController::class, 'export'])->name('exportUsers');
 require __DIR__.'/auth.php';
