@@ -35,12 +35,12 @@
           <option value="0">January</option>
           <option value="1">February</option>
           <option value="2">March</option>
-          <option value="3">April</option>
+          <option value="3" selected>April</option>
           <option value="4">May</option>
           <option value="5">June</option>
           <option value="6" >July</option>
           <option value="7">August</option>
-          <option value="8" selected>September</option>
+          <option value="8" >September</option>
           <option value="9">October</option>
           <option value="10">November</option>
           <option value="11">December</option>
@@ -59,7 +59,8 @@
             "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-gray-800 dark:text-neutral-200\" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>"
           }' class="hidden" id="year-select">
           <option>2023</option>
-          <option selected>2024</option>
+          <option>2024</option>
+          <option selected>2025</option>
         </select>
       </div>
     </div>
@@ -253,17 +254,17 @@
       </button>
     </div>
     <div>
-      <button type="button" class="m-px size-10 flex justify-center items-center  border border-transparent text-sm font-medium text-grey-800 hover:border-blue-600 rounded-full dark:bg-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-100 dark:hover:border-neutral-700">
+      <button type="button" class="bg-red-600 m-px size-10 flex justify-center items-center  border border-transparent text-sm font-medium text-grey-800 hover:border-blue-600 rounded-full dark:bg-blue-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-100 dark:hover:border-neutral-700">
         20
       </button>
     </div>
     <div>
-      <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
+      <button type="button" class="bg-red-600 m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
         21
       </button>
     </div>
     <div>
-      <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
+      <button type="button" class="bg-red-600 m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
         22
       </button>
     </div>
@@ -274,7 +275,7 @@
   <!-- Days -->
   <div class="grid grid-cols-7" style="margin-left: 7%">
     <div>
-      <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
+      <button type="button" class="bg-red-600 m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
         23
       </button>
     </div>

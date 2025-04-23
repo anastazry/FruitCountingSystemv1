@@ -49,6 +49,8 @@ Route::prefix('admin')->group(function () {
 });
 // web.php
 Route::get('/sales-chart', [AdminController::class, 'showChart'])->name('sales.chart');
+Route::get('/create-newuser', [AdminController::class, 'returnRegisterNewUserPage'])->name('admin-users-registration-form');
+Route::get('/user-list', [AdminController::class, 'getAllUserList'])->name('admin.users-list');
 
 Route::prefix('super')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'returnSuperView'])->name('super-dashboard');
