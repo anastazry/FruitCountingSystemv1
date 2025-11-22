@@ -35,14 +35,14 @@
           <option value="0">January</option>
           <option value="1">February</option>
           <option value="2">March</option>
-          <option value="3" selected>April</option>
+          <option value="3" >April</option>
           <option value="4">May</option>
           <option value="5">June</option>
           <option value="6" >July</option>
           <option value="7">August</option>
           <option value="8" >September</option>
           <option value="9">October</option>
-          <option value="10">November</option>
+          <option value="10" selected>November</option>
           <option value="11">December</option>
         </select>
       </div>
@@ -78,6 +78,9 @@
 
   <!-- Weeks -->
   <div class="grid grid-cols-7 text-center text-sm text-gray-500 dark:text-neutral-500" style="margin-left: 7%">
+    <span class="m-px w-10 block text-center text-sm text-gray-500 dark:text-neutral-500">
+      Su
+    </span>
     <span class="m-px w-10 block text-center text-sm text-gray-500 dark:text-neutral-500" >
       Mo
     </span>
@@ -96,9 +99,7 @@
     <span class="m-px w-10 block text-center text-sm text-gray-500 dark:text-neutral-500">
       Sa
     </span>
-    <span class="m-px w-10 block text-center text-sm text-gray-500 dark:text-neutral-500">
-      Su
-    </span>
+
   </div>
   <!-- Weeks -->
 
@@ -249,7 +250,7 @@
       </button>
     </div>
     <div>
-      <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-white disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-white dark:text-neutral-200 bg-blue-600">
+      <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-white disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-white dark:text-neutral-200 bg-green-600">
         19
       </button>
     </div>
@@ -280,12 +281,13 @@
       </button>
     </div>
     <div>
-      <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
+      <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200 bg-blue-600">
         24
       </button>
     </div>
+    
     <div >
-        <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200">
+        <button type="button" class="m-px size-10 flex justify-center items-center border border-transparent text-sm text-gray-800 rounded-full hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:border-blue-600 focus:text-blue-600 dark:text-neutral-200 bg-white-600">
         25
       </button>
     </div>
@@ -613,6 +615,35 @@
     // Call your function to update the calendar display here.
   }
 });
+function updateCalendar() {
+    const month = parseInt(monthSelect.value);
+    const year = parseInt(yearSelect.value);
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    const container = document.getElementById('calendar-days');
+    container.innerHTML = '';
+
+    // Adjust for Monday-start weeks
+    const offset = (firstDay + 6) % 7;
+
+    for (let i = 0; i < offset; i++) {
+        container.innerHTML += `<div></div>`;
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+        container.innerHTML += `
+          <div>
+            <button class="m-px size-10 flex justify-center items-center 
+            rounded-full hover:border-blue-600 hover:text-blue-600">
+              ${day}
+            </button>
+          </div>`;
+    }
+
+    console.log(`Rendered: ${month + 1}/${year}`);
+}
 
         </script>
 
