@@ -46,7 +46,7 @@
           <div class="p-4 md:p-5">
             <div class="flex items-center gap-x-2">
               <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
-                JUMLAH BUAH 2024
+                JUMLAH BUAH 2025
               </p>
               <div class="hs-tooltip">
                 <div class="hs-tooltip-toggle">
@@ -56,7 +56,7 @@
                     <path d="M12 17h.01" />
                   </svg>
                   <span class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm dark:bg-neutral-700" role="tooltip">
-                    JUMLAH BUAH 2024
+                    JUMLAH BUAH 2025
                   </span>
                 </div>
               </div>
