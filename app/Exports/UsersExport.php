@@ -63,7 +63,7 @@ class UsersExport implements FromCollection, WithMapping, WithHeadings
             'Peringkat',
             'Blok',
             'Lot',
-            'No Platform',
+            'No Pentas Tuai',
             'Nama Mandor',
             'Tarikh',
             'Muda',
