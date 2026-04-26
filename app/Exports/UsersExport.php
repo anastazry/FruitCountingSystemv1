@@ -15,12 +15,15 @@ class UsersExport implements FromCollection, WithMapping, WithHeadings
     {
         return DB::table('fruits_detaile_tbl')
             ->join('table_mandor_assignment_tbl', 'table_mandor_assignment_tbl.id', '=', 'fruits_detaile_tbl.assignment_id')
+            ->join('users', 'users.id', '=', 'fruits_detaile_tbl.mandor_id')
             ->select(
                 'fruits_detaile_tbl.id',
                 'table_mandor_assignment_tbl.peringkat',
                 'table_mandor_assignment_tbl.blok',
                 'table_mandor_assignment_tbl.n_lot',
+                'table_mandor_assignment_tbl.n_p_tuai',
                 'fruits_detaile_tbl.mandor_id',
+                'users.name as mandor_name',
                 'fruits_detaile_tbl.tarikh',
                 'fruits_detaile_tbl.muda',
                 'fruits_detaile_tbl.busuk',
@@ -41,7 +44,8 @@ class UsersExport implements FromCollection, WithMapping, WithHeadings
             $data->peringkat,
             $data->blok,
             $data->n_lot,
-            $data->mandor_id,
+            $data->n_p_tuai,
+            $data->mandor_name,
             $data->tarikh,
             $data->muda,
             $data->busuk,
@@ -58,8 +62,9 @@ class UsersExport implements FromCollection, WithMapping, WithHeadings
             'No.',
             'Peringkat',
             'Blok',
+            'Lot',
             'No Platform',
-            'Dilaksanakan (Mandor ID)',
+            'Nama Mandor',
             'Tarikh',
             'Muda',
             'Busuk',
