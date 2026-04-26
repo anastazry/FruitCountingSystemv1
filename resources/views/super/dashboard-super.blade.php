@@ -1,17 +1,17 @@
 @extends('layouts.app')
 <style>
     .uniform-card {
-        height: auto; /* Adjust the height as needed */
+        height: auto;
         display: flex;
         flex-direction: column;
-        justify-content: center; /* Center vertically */
-        align-items: center; /* Center horizontally */
+        justify-content: center;
+        align-items: center;
         overflow-y: auto;
-        text-align: center; /* Center text inside elements */
+        text-align: center;
     }
     @media (max-width: 768px) {
         .uniform-card {
-            height: auto; /* Adjust for smaller screens */
+            height: auto;
         }
     }
 
@@ -33,9 +33,8 @@
         }
     }
 
-    /* Ensure <p> tags are centered within the card */
     .uniform-card p {
-        margin: 0; /* Reset margin for paragraphs */
+        margin: 0;
     }
 </style>
 
@@ -46,7 +45,7 @@
           <div class="p-4 md:p-5">
             <div class="flex items-center gap-x-2">
               <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
-                JUMLAH BUAH 2025
+                JUMLAH BUAH 2026
               </p>
               <div class="hs-tooltip">
                 <div class="hs-tooltip-toggle">
@@ -56,7 +55,7 @@
                     <path d="M12 17h.01" />
                   </svg>
                   <span class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm dark:bg-neutral-700" role="tooltip">
-                    JUMLAH BUAH 2025
+                    JUMLAH BUAH 2026
                   </span>
                 </div>
               </div>
@@ -64,7 +63,7 @@
 
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                72,540
+                89,210
               </h3>
               <span class="flex items-center gap-x-1 text-green-600">
                 <svg class="inline-block size-4 self-center" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -72,7 +71,7 @@
                   <polyline points="16 7 22 7 22 13" />
                 </svg>
                 <span class="inline-block text-sm">
-                  1.7%
+                  2.3%
                 </span>
               </span>
             </div>
@@ -91,7 +90,7 @@
 
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                13000
+                15,800
               </h3>
             </div>
           </div>
@@ -109,7 +108,7 @@
 
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                23,3333
+                27,450
               </h3>
               <span class="flex items-center gap-x-1 text-red-600">
                 <svg class="inline-block size-4 self-center" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -136,11 +135,13 @@
 
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                34,222
+                41,670
               </h3>
             </div>
           </div>
         </div>
+
+        <!-- Card -->
         <div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
             <div class="p-4 md:p-5">
               <div class="flex items-center gap-x-2">
@@ -151,7 +152,7 @@
   
               <div class="mt-1 flex items-center gap-x-2">
                 <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                  23,344
+                  28,910
                 </h3>
               </div>
             </div>
@@ -169,9 +170,6 @@
               <h2 class="text-sm text-gray-500 dark:text-neutral-500">
                 Pecahan (Bulanan)
               </h2>
-              {{-- <p class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                $126,238.49
-              </p> --}}
             </div>
 
             <div>
@@ -199,7 +197,7 @@
                 Pecahan (Mingguan)
               </h2>
               <p class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                80.3k
+                98.7k
               </p>
             </div>
 
@@ -231,10 +229,7 @@
                   <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
                     Pecahan (Mandor)
                   </h2>
-
                 </div>
-
-
               </div>
               <!-- End Header -->
 
@@ -280,7 +275,6 @@
                         </span>
                       </div>
                     </th>
-
                   </tr>
                 </thead>
 
@@ -307,20 +301,19 @@
                     </td>
                     <td class="h-px w-72 whitespace-nowrap">
                       <div class="px-6 py-3">
-                        <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200 ">25</span>
+                        <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">31</span>
                       </div>
                     </td>
                     <td class="h-px w-72 whitespace-nowrap">
-                        <div class="px-6 py-3">
-                          <span class="block text-sm font-semibold text-red-800 dark:text-neutral-200 ">2</span>
-                        </div>
-                      </td>
-                      <td class="h-px w-72 whitespace-nowrap">
-                        <div class="px-6 py-3">
-                          <span class="block text-sm font-semibold text-grey-800 dark:text-neutral-200 ">3009</span>
-                        </div>
-                      </td>
-
+                      <div class="px-6 py-3">
+                        <span class="block text-sm font-semibold text-red-800 dark:text-neutral-200">3</span>
+                      </div>
+                    </td>
+                    <td class="h-px w-72 whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="block text-sm font-semibold text-grey-800 dark:text-neutral-200">3,874</span>
+                      </div>
+                    </td>
                   </tr>
 
                   <tr>
@@ -345,19 +338,19 @@
                     </td>
                     <td class="h-px w-72 whitespace-nowrap">
                       <div class="px-6 py-3">
-                        <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">7</span>
+                        <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">9</span>
                       </div>
                     </td>
                     <td class="h-px w-72 whitespace-nowrap">
-                        <div class="px-6 py-3">
-                          <span class="block text-sm font-semibold text-red-800 dark:text-neutral-200 ">2</span>
-                        </div>
-                      </td>
-                      <td class="h-px w-72 whitespace-nowrap">
-                        <div class="px-6 py-3">
-                          <span class="block text-sm font-semibold text-grey-800 dark:text-neutral-200 ">4440</span>
-                        </div>
-                      </td>
+                      <div class="px-6 py-3">
+                        <span class="block text-sm font-semibold text-red-800 dark:text-neutral-200">1</span>
+                      </div>
+                    </td>
+                    <td class="h-px w-72 whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="block text-sm font-semibold text-grey-800 dark:text-neutral-200">5,210</span>
+                      </div>
+                    </td>
                   </tr>
 
                   <tr>
@@ -382,21 +375,21 @@
                     </td>
                     <td class="h-px w-72 whitespace-nowrap">
                       <div class="px-6 py-3">
-                        <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">9</span>
+                        <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">12</span>
                       </div>
                     </td>
                     <td class="h-px w-72 whitespace-nowrap">
                       <div class="px-6 py-3">
-                        <span class="block text-sm font-semibold text-red-800 dark:text-neutral-200 ">3</span>
+                        <span class="block text-sm font-semibold text-red-800 dark:text-neutral-200">2</span>
                       </div>
                     </td>
                     <td class="h-px w-72 whitespace-nowrap">
                       <div class="px-6 py-3">
-                        <span class="block text-sm font-semibold text-grey-800 dark:text-neutral-200 ">3125</span>
+                        <span class="block text-sm font-semibold text-grey-800 dark:text-neutral-200">3,890</span>
                       </div>
                     </td>
                   </tr>
-                  
+
                   <tr>
                     <td class="size-px whitespace-nowrap">
                       <div class="ps-6 py-3">
@@ -419,21 +412,21 @@
                     </td>
                     <td class="h-px w-72 whitespace-nowrap">
                       <div class="px-6 py-3">
-                        <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">5</span>
+                        <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">7</span>
                       </div>
                     </td>
                     <td class="h-px w-72 whitespace-nowrap">
                       <div class="px-6 py-3">
-                        <span class="block text-sm font-semibold text-red-800 dark:text-neutral-200 ">1</span>
+                        <span class="block text-sm font-semibold text-red-800 dark:text-neutral-200">1</span>
                       </div>
                     </td>
                     <td class="h-px w-72 whitespace-nowrap">
                       <div class="px-6 py-3">
-                        <span class="block text-sm font-semibold text-grey-800 dark:text-neutral-200 ">2210</span>
+                        <span class="block text-sm font-semibold text-grey-800 dark:text-neutral-200">2,755</span>
                       </div>
                     </td>
                   </tr>
-                  
+
                   <tr>
                     <td class="size-px whitespace-nowrap">
                       <div class="ps-6 py-3">
@@ -456,22 +449,20 @@
                     </td>
                     <td class="h-px w-72 whitespace-nowrap">
                       <div class="px-6 py-3">
-                        <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">8</span>
+                        <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">10</span>
                       </div>
                     </td>
                     <td class="h-px w-72 whitespace-nowrap">
                       <div class="px-6 py-3">
-                        <span class="block text-sm font-semibold text-red-800 dark:text-neutral-200 ">4</span>
+                        <span class="block text-sm font-semibold text-red-800 dark:text-neutral-200">3</span>
                       </div>
                     </td>
                     <td class="h-px w-72 whitespace-nowrap">
                       <div class="px-6 py-3">
-                        <span class="block text-sm font-semibold text-grey-800 dark:text-neutral-200 ">3995</span>
+                        <span class="block text-sm font-semibold text-grey-800 dark:text-neutral-200">4,820</span>
                       </div>
                     </td>
                   </tr>
-
-
                 </tbody>
               </table>
               <!-- End Table -->
@@ -480,7 +471,7 @@
               <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-neutral-700">
                 <div>
                   <p class="text-sm text-gray-600 dark:text-neutral-400">
-                    <span class="font-semibold text-gray-800 dark:text-neutral-200">12</span> results
+                    <span class="font-semibold text-gray-800 dark:text-neutral-200">16</span> results
                   </p>
                 </div>
 
@@ -507,6 +498,5 @@
           </div>
         </div>
       </div>
-    
 
 @endsection
