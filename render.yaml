@@ -25,6 +25,8 @@ services:
         value: pgsql
       - key: DB_URL
         sync: false
+      - key: DB_DIRECT_URL
+        sync: false
       - key: HARVEST_PHOTO_DISK
         value: s3
       - key: AWS_ACCESS_KEY_ID

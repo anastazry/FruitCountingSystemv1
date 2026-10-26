@@ -3,10 +3,12 @@ set -eu
 cd /var/www/html
 : "${APP_KEY:?Set a permanent Laravel APP_KEY in Render environment settings}"
 : "${DB_URL:?Set the Neon PostgreSQL connection URL in Render environment settings}"
+php artisan config:clear
+# Schema migrations need a direct connection, not the transaction pooler.
+DB_URL="${DB_DIRECT_URL:-$DB_URL}" php artisan migrate --force
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
-php artisan migrate --force
 php artisan storage:link --force
 chown -R www-data:www-data storage bootstrap/cache
 sed -i "s/^Listen 80$/Listen ${PORT:-8080}/" /etc/apache2/ports.conf

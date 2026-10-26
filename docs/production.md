@@ -5,7 +5,7 @@
 ## Account setup
 
 1. Sign into Render using the GitHub account that owns this repository and grant access to this repository.
-2. Create a Neon Free project, choosing a nearby region. Copy its PostgreSQL connection URL with `sslmode=require` into Render's secret `DB_URL` field; never commit it.
+2. Create a Neon Free project, choosing a nearby region. Set the pooled PostgreSQL URL as Render's secret `DB_URL`, and its direct (non-pooler) URL as `DB_DIRECT_URL` for migrations. Both require `sslmode=require`; never commit them.
 3. Create a Render Blueprint from this repository with the Free service plan.
 4. Supply `APP_KEY` (a new permanent Laravel encryption key), `APP_URL` (the Render HTTPS URL), and `DB_URL` when prompted. Do not reuse a temporary key or regenerate it on redeploys.
 5. Verify build logs, migrations, `/up`, HTTPS login, and reporting before using real data.
