@@ -17,6 +17,8 @@ class MandorController extends Controller
 {
     public function getDriverAnswer($selection, $assignment_id)
     {
+        MandorAssignment::findOrFail($assignment_id);
+        abort_unless(in_array($selection, ['yes', 'no']), 422);
         $user_id = Auth::user()->id;
     
         if ($selection == "yes") {
@@ -30,14 +32,9 @@ class MandorController extends Controller
                 // Update using DB::table for an existing record
                 DB::table('fruits_detaile_tbl')
                     ->where('id', $fruitToday->id)
-                    ->update(['delivery_status' => 'Dalam Perjalanan']);
+                    ->update(['delivery_status' => 'Dalam Perjalanan', 'driver_id' => $user_id]);
             } else {
-                // Create a new record using Eloquent
-                $fruit = FruitsModel::create([
-                    'driver_id' => $user_id,
-                    'assignment_id' => $assignment_id,
-                    'delivery_status' => "Dalam Perjalanan",
-                ]);
+                return redirect()->route('driver-confirmation', ['assignment_id' => $assignment_id]);
             }
             return view('mandor.thankyoupage');
         } else {
@@ -46,7 +43,7 @@ class MandorController extends Controller
     }
     
     public function getDriverPage($assignment_id){
-        $assignment = MandorAssignment::find($assignment_id);
+        $assignment = MandorAssignment::findOrFail($assignment_id);
         $fruitToday = DB::table('fruits_detaile_tbl')
         ->where('assignment_id', $assignment_id)
         ->whereDate('tarikh', Carbon::today())
@@ -61,6 +58,8 @@ class MandorController extends Controller
 
     public function editCurrentFruitDetails(Request $request)
     {
+        $request->validate(collect(['dituai', 'muda', 'busuk', 'kosong', 'panjang', 's_lama', 's_baru'])
+            ->mapWithKeys(fn ($field) => [$field => 'required|integer|min:0'])->all());
         // Find the fruit
         $fruit = FruitsModel::find($request->fruit_id);
         if ($fruit) {
@@ -75,47 +74,14 @@ class MandorController extends Controller
             $fruit->tarikh = now();
     
             if ($request->hasFile('gambar')) {
-                // Handle the new image upload
-                $file = $request->file('gambar');
-                $oldImagePath = public_path('storage/'.$fruit->image_path); // Full path to the old image
-                
-                // Debugging: Check the old image path
-                // dd('Old image path: ', $oldImagePath, file_exists($oldImagePath));
-    
-                // Delete the old image if it exists
-                if ($fruit->image_path && file_exists($oldImagePath)) {
-                    // Delete the old image file
-                    unlink($oldImagePath);
-    
-                    // Optionally, check if the directory is empty and delete it
-                    $oldImageDirectory = dirname($oldImagePath);
-                    
-                    // Debugging: Check the old image directory
-                    // dd('Old image directory: ', $oldImageDirectory, count(glob($oldImageDirectory . '/*')) === 0);
-    
-                    if (is_dir($oldImageDirectory) && count(glob($oldImageDirectory . '/*')) === 0) {
-                        rmdir($oldImageDirectory); // Remove the directory if empty
-                    }
-                }
-    
-                // Generate a unique folder name
-                // Generate a unique folder name
-                $folderName = 'images/' . uniqid() . '-' . now()->timestamp;
-            
-                // Store the file in the folder and get the relative file path
-                $path = $file->store($folderName, 'public'); // Stores in 'storage/app/public'
-            
-                // Just store the relative path, no need for URL
-                $imagePath = $path; // Save relative path
-                $fruit->image_path = $imagePath;
-
-            } else {
-                // Retain the current image path if no new file is uploaded
-                if ($request->input('current_image_path')) {
-                    $fruit->image_path = $request->input('current_image_path');
+                $request->validate(['gambar' => 'image|mimes:jpeg,png,jpg,gif|max:2048']);
+                $oldImagePath = $fruit->image_path;
+                $fruit->image_path = $request->file('gambar')->store('images', \App\Support\HarvestPhotos::disk());
+                $fruit->save();
+                if ($oldImagePath) {
+                    Storage::disk(\App\Support\HarvestPhotos::disk())->delete($oldImagePath);
                 }
             }
-    
             // Save the updated fruit details
             $fruit->save();
     
@@ -191,7 +157,7 @@ class MandorController extends Controller
         // {!! QrCode::size(200)->generate('mandor-update-fruit-details', ['assignment_id' => $assignment_id])}
 
         // Retrieve metadata for Mandor
-        $metadataMandor = MandorAssignment::find($assignment_id);
+        $metadataMandor = MandorAssignment::findOrFail($assignment_id);
         return view('admin.qrcode-page', compact('metadataMandor', 'qrCode', 'token'));
         // Render the PDF with the QR code and metadata
         // $pdf = Pdf::loadView('admin.qrcode-page', compact('metadataMandor', 'qrCode'))->setPaper('a4', 'portrait');
@@ -235,7 +201,7 @@ class MandorController extends Controller
                 } else {
                     return view('mandor.update-fruit', ['metadataMandor' => $metadataMandor]);
                 }
-            } elseif ($user->role == "Pemandu") {
+            } elseif (in_array($user->role, ['Pemandu', 'Driver'])) {
                 if($fruitToday && $fruitToday->delivery_status == "Dalam Perjalanan"){
                     return view('mandor.redirection-page');
                 }elseif($fruitToday){
@@ -290,13 +256,13 @@ class MandorController extends Controller
     public function insertFruitDetails(Request $request)
     {
         $validatedData = $request->validate([
-            'dituai' => 'required|string',
-            'muda' => 'required|string',
-            'busuk' => 'required|string',
-            'kosong' => 'required|string',
-            'panjang' => 'required|string',
-            's_lama' => 'required|string',
-            's_baru' => 'required|string',
+            'dituai' => 'required|integer|min:0',
+            'muda' => 'required|integer|min:0',
+            'busuk' => 'required|integer|min:0',
+            'kosong' => 'required|integer|min:0',
+            'panjang' => 'required|integer|min:0',
+            's_lama' => 'required|integer|min:0',
+            's_baru' => 'required|integer|min:0',
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         $user_id = Auth::user()->id;
@@ -309,7 +275,7 @@ class MandorController extends Controller
         $folderName = 'images/' . uniqid() . '-' . now()->timestamp;
     
         // Store the file in the folder and get the relative file path
-        $path = $file->store($folderName, 'public'); // Stores in 'storage/app/public'
+        $path = $file->store($folderName, \App\Support\HarvestPhotos::disk()); // Stores in 'storage/app/public'
     
         // Just store the relative path, no need for URL
         $imagePath = $path;

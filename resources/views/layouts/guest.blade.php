@@ -8,23 +8,21 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-gray-900 antialiased">
-        <div class="bg-orange-400 min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 ">
+        <div class="bg-orange-400 min-h-screen flex flex-col sm:justify-center items-center px-4 py-6 sm:py-0 ">
             <div>
                 <a href="/">
-                <img class="w-25 h-50 fill-current text-gray-500" src="{{ asset('images/icons/FELDA_logo.png') }}" alt="Icon">
+                <img class="w-24 h-auto" src="{{ asset('images/icons/FELDA_logo.png') }}" alt="Icon">
 
                     {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
                 </a>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-orange-300 shadow-md overflow-hidden sm:rounded-lg">
+            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-orange-300 shadow-md overflow-hidden rounded-lg">
                 {{ $slot }}
             </div>
         </div>

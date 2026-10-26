@@ -3,7 +3,7 @@
 @extends('layouts.app') <!-- Extend the master.blade.php file -->
 
 @section('content') <!-- Start the content section -->
-    <div class="py-12" style="width: 100%">
+    <div class="py-3 sm:py-8" style="width: 100%">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8" style="width: 100%">
             <div class="bg-white border rounded shadow p-4" >
                 <div class="border-b p-2">
@@ -113,7 +113,7 @@
                         <!-- Phone Number -->
                         <div class="mt-4">
                             @if(isset($fruitToday->image_path))
-                                <img src="{{ asset('storage/'.$fruitToday->image_path) }}" alt="Fruit Image" class="w-32 h-32 object-cover">
+                                <img src="{{ \App\Support\HarvestPhotos::url($fruitToday->image_path) }}" alt="Fruit Image" class="w-32 h-32 object-cover">
                             @endif
                             <x-input-label for="gambar" :value="__('Gambar')" />
                             <x-text-input id="gambar" class="block mt-1 w-full" type="file" name="gambar" autocomplete="username" />

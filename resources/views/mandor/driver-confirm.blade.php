@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Example</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -13,18 +13,18 @@
     </style>
 </head>
 
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
 
-    <div class="bg-white p-10 rounded-xl shadow-xl max-w-lg w-full text-center space-y-10">
+    <div class="bg-white p-5 sm:p-10 rounded-xl shadow-xl max-w-lg w-full text-center space-y-10">
         <!-- Header Section -->
         <div class="space-y-2">
-            <h1 class="text-4xl font-bold text-indigo-600">Peringkat: 
+            <h1 class="text-2xl sm:text-4xl font-bold text-indigo-600">Peringkat:
                 <span class="text-gray-900">{{$assignment->peringkat}}</span>
             </h1>
-            <h1 class="text-2xl font-semibold text-gray-600">Blok: 
+            <h1 class="text-2xl font-semibold text-gray-600">Blok:
                 <span class="text-gray-900">{{$assignment->blok}}</span>
             </h1>
-            <h1 class="text-xl font-medium text-gray-500">No Lot: 
+            <h1 class="text-xl font-medium text-gray-500">No Lot:
                 <span class="text-gray-800">{{$assignment->n_lot}}</span>
             </h1>
         </div>

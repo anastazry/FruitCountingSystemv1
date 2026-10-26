@@ -3,7 +3,7 @@
 @extends('layouts.app') <!-- Extend the master.blade.php file -->
 
 @section('content') <!-- Start the content section -->
-    <div class="py-12">
+    <div class="py-3 sm:py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white border rounded shadow p-4">
               <div class="border-b p-2">

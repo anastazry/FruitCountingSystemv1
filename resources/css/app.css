@@ -1,3 +1,102 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.uniform-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+@media (max-width: 768px) {
+    .card-container { grid-template-columns: 1fr; }
+}
+
+/* Shared sizing keeps forms and navigation usable on touch screens. */
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; overflow-wrap: break-word; }
+img, video { max-width: 100%; }
+.mobile-menu-toggle {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+}
+.mobile-menu-toggle:focus-visible { outline: 2px solid #ea580c; outline-offset: 2px; }
+#hs-application-sidebar nav a, #hs-application-sidebar nav button { min-height: 44px; }
+#calendar-days > div { display: flex; justify-content: center; min-width: 0; }
+#month-select, #year-select { min-height: 44px; max-width: 100%; }
+
+@media (min-width: 1024px) {
+    .mobile-menu-toggle { display: none; }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+    .card-container { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 639px) {
+    .app-content input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+    .app-content select, .app-content textarea {
+        min-width: 0;
+        max-width: 100%;
+        min-height: 44px;
+        font-size: 16px;
+    }
+    .app-content form input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+    .app-content form select, .app-content form textarea { width: 100%; }
+    .app-content form button[type="submit"] { min-height: 44px; }
+    .app-content form > .flex.flex-wrap > * { width: 100%; margin-left: 0; }
+    #calendar-days button { width: 100%; max-width: 44px; height: 44px; margin: 0; }
+    #month-select { width: 100%; padding-inline: 8px 28px; }
+    #year-select { padding-inline: 8px 28px; }
+    .mobile-records, .mobile-records tbody { display: block; width: 100%; min-width: 0; }
+    .mobile-records thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+    }
+    .mobile-records tbody > tr {
+        display: block;
+        margin: 12px;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        background: white;
+        overflow: hidden;
+    }
+    .mobile-records tbody > tr > td {
+        display: block;
+        position: relative;
+        width: auto;
+        height: auto;
+        min-height: 44px;
+        padding: 12px 12px 12px 46%;
+        border-bottom: 1px solid #f3f4f6;
+        text-align: left;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+    .mobile-records td[data-label]::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 12px;
+        top: 12px;
+        width: 40%;
+        color: #6b7280;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .mobile-records tbody > tr > td[data-label=""] { display: none; }
+    .mobile-records td > div { padding: 0; }
+    .mobile-records tbody > tr > td:last-child { border-bottom: 0; }
+    .mobile-records td a { min-height: 44px; align-items: center; margin-right: 8px; }
+    .mobile-records tbody > tr > td[colspan] { padding: 20px; text-align: center; }
+}

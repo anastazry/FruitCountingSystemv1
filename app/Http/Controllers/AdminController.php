@@ -6,32 +6,26 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\MandorAssignment;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class AdminController extends Controller
 {
-    public function returnSuperView(){
-        $page = "Dashboard";
-        return view('super.dashboard-super', compact('page'));
-    }
     public function getAssignmentList()
     {
-        $assignments = MandorAssignment::all();
+        $assignments = MandorAssignment::with(['fruits' => fn ($query) => $query
+            ->where('created_at', '>=', today())
+            ->where('created_at', '<', today()->addDay())
+            ->orderBy('id')])->get();
     
         foreach ($assignments as $assignment) {
             // Query the fruits table using assignment_id and created_at for today
-            $fruitsToday = DB::table('fruits_detaile_tbl')
-                ->where('assignment_id', $assignment->id)
-                ->whereDate('created_at', Carbon::today())
-                ->get(); // Get a collection of results
+            $fruitsToday = $assignment->fruits;
     
             if ($fruitsToday->isNotEmpty()) {
                 // Initialize default values
-                $hasDeliveryStatus = false;
+
                 $status = "Pending";
     
                 foreach ($fruitsToday as $fruit) {
@@ -40,7 +34,7 @@ class AdminController extends Controller
                     // Check the delivery status
                     if ($fruit->delivery_status == "Dalam Perjalanan") {
                         $assignment->delivery_status = "Dalam Perjalanan";
-                        $hasDeliveryStatus = true;
+
                     } elseif ($fruit->delivery_status == "Pending") {
                         $assignment->delivery_status = "Pending";
                     } else {
@@ -114,8 +108,7 @@ class AdminController extends Controller
         ]);
         $user->save();
         // dd ($user);
-        $page = "Dashboard";
-        return view('dashboard', compact('page'));
+        return redirect()->route('admin.users-list')->with('success', 'User registered successfully.');
 
         // return redirect()->route('admin.create-newuser')->with('message', 'User registered successfully');
     }
@@ -185,7 +178,6 @@ class AdminController extends Controller
     
         if ($validator->fails()) {
             // Dump the failed validation messages (optional for debugging)
-            dd($validator->errors()->all()); // Shows all error messages
             
             // Return back with errors if validation fails
             return redirect()->back()->withErrors($validator)->withInput();
@@ -198,12 +190,12 @@ class AdminController extends Controller
         // // Use the modified data to create the record
         $mandorAssignment = MandorAssignment::create($validatedData);
         $page = "Dashboard";
-        return redirect()->route('dashboard')->with($page);
+        return redirect()->route('dashboard')->with('success', 'Assignment created successfully.');
     }
     public function getUpdateAssignmentDetails($assignment_id)
     {
         // Find the existing MandorAssignment by assignment_id
-        $mandorAssignment = MandorAssignment::find($assignment_id);
+        $mandorAssignment = MandorAssignment::findOrFail($assignment_id);
         $users = User::all();
 
         // dd($mandorAssignment);
@@ -233,7 +225,6 @@ class AdminController extends Controller
 
         if ($validator->fails()) {
             // Dump the failed validation messages (optional for debugging)
-            dd($validator->errors()->all()); // Shows all error messages
             
             // Return back with errors if validation fails
             return redirect()->back()->withErrors($validator)->withInput();

@@ -48,7 +48,7 @@
 
 <div class="overflow-x-auto">
 
-    <table class="min-w-full divide-y divide-gray-200 bg-white shadow-md rounded-md table-auto">
+    <table class="mobile-records min-w-full divide-y divide-gray-200 bg-white shadow-md rounded-md table-auto">
         <thead class="bg-gray-100">
             <tr>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-800uppercase tracking-wider">No.</th>
@@ -68,31 +68,31 @@
         <tbody class="bg-white divide-y divide-gray-200">
             @foreach($fruits as $index => $fruit)
             <tr>
-                <td class="px-6 py-4 whitespace-nowrap">{{ $index + 1 }}</td>
-                <td class="px-6 py-4 whitespace-nowrap">
+                <td data-label="No." class="px-6 py-4 whitespace-nowrap">{{ $index + 1 }}</td>
+                <td data-label="Peringkat" class="px-6 py-4 whitespace-nowrap">
                     {{ $fruit->peringkat ?? '-' }}
                 </td>
                 
-                <td class="px-6 py-4 whitespace-nowrap">
+                <td data-label="Blok" class="px-6 py-4 whitespace-nowrap">
                     {{ $fruit->blok ?? '-' }}
                 </td>
                 
-                <td class="px-6 py-4 whitespace-nowrap">
+                <td data-label="No Lot" class="px-6 py-4 whitespace-nowrap">
                     {{ $fruit->n_lot ?? '-' }}
                 </td>
                 
-                <td class="px-6 py-4 whitespace-nowrap">
+                <td data-label="Pentas Tuai" class="px-6 py-4 whitespace-nowrap">
                     {{ $fruit->n_p_tuai ?? '-' }}
                 </td>
                 
 
-                <td class="px-6 py-4 whitespace-nowrap">{{ $fruit->tarikh }}</td>
-                <td class="px-6 py-4 whitespace-nowrap">{{ $fruit->muda }}</td>
-                <td class="px-6 py-4 whitespace-nowrap">{{ $fruit->busuk }}</td>
-                <td class="px-6 py-4 whitespace-nowrap">{{ $fruit->kosong }}</td>
-                <td class="px-6 py-4 whitespace-nowrap">{{ $fruit->panjang }}</td>
-                <td class="px-6 py-4 whitespace-nowrap">{{ $fruit->s_lama }}</td>
-                <td class="px-6 py-4 whitespace-nowrap">{{ $fruit->s_baru }}</td>
+                <td data-label="Tarikh" class="px-6 py-4 whitespace-nowrap">{{ $fruit->tarikh }}</td>
+                <td data-label="Muda" class="px-6 py-4 whitespace-nowrap">{{ $fruit->muda }}</td>
+                <td data-label="Busuk" class="px-6 py-4 whitespace-nowrap">{{ $fruit->busuk }}</td>
+                <td data-label="Kosong" class="px-6 py-4 whitespace-nowrap">{{ $fruit->kosong }}</td>
+                <td data-label="Panjang" class="px-6 py-4 whitespace-nowrap">{{ $fruit->panjang }}</td>
+                <td data-label="Serangan Lama" class="px-6 py-4 whitespace-nowrap">{{ $fruit->s_lama }}</td>
+                <td data-label="Serangan Baru" class="px-6 py-4 whitespace-nowrap">{{ $fruit->s_baru }}</td>
             </tr>
             @endforeach
         

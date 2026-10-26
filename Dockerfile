@@ -1,37 +1,28 @@
-FROM php:8.2-cli
-
-# Install system dependencies and PHP extensions
-RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    zip \
-    libzip-dev \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    nodejs \
-    npm \
-    && docker-php-ext-install zip pdo pdo_mysql gd
-
-# Install Composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
+FROM node:22-bookworm-slim AS frontend
 WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY resources ./resources
+COPY tailwind.config.js postcss.config.js vite.config.js ./
+RUN npm run build
 
-# Copy project files
+FROM php:8.3-apache-bookworm
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git unzip libzip-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev libpq-dev libonig-dev libxml2-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd zip pdo_pgsql pdo_mysql mbstring bcmath opcache \
+    && a2enmod rewrite \
+    && rm -rf /var/lib/apt/lists/*
+COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
+WORKDIR /var/www/html
 COPY . .
-
-# Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader --no-interaction
-
-# Install frontend dependencies and build assets
-RUN npm install && npm run build
-
-# Laravel optimization
-RUN php artisan config:clear \
-    && php artisan route:clear \
-    && php artisan view:clear
-
+RUN composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader \
+    && chown -R www-data:www-data storage bootstrap/cache
+COPY --from=frontend /app/public/build ./public/build
+COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
+COPY docker/php-production.ini /usr/local/etc/php/conf.d/production.ini
+COPY docker/entrypoint.sh /usr/local/bin/app-entrypoint
+RUN chmod +x /usr/local/bin/app-entrypoint
 EXPOSE 8080
-
-CMD php artisan migrate --force && php artisan db:seed --class=UserSeeder --force && php artisan storage:link && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
+ENTRYPOINT ["app-entrypoint"]
+CMD ["apache2-foreground"]
